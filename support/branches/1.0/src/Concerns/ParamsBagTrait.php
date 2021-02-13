@@ -43,13 +43,17 @@ trait ParamsBagTrait
 
         if (is_null($key)) {
             return $this->paramsBag;
-        } elseif (is_string($key)) {
-            return $this->paramsBag->get($key, $default);
-        } elseif (is_array($key)) {
-            return $this->paramsBag->set($key);
-        } else {
-            throw new InvalidArgumentException('Invalid ParamsBag passed method arguments');
         }
+
+        if (is_string($key)) {
+            return $this->paramsBag->get($key, $default);
+        }
+
+        if (is_array($key)) {
+            return $this->paramsBag->set($key);
+        }
+
+        throw new InvalidArgumentException('Invalid ParamsBag passed method arguments');
     }
 
     /**
