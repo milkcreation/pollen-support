@@ -43,13 +43,17 @@ trait ConfigBagTrait
 
         if (is_null($key)) {
             return $this->configBag;
-        } elseif (is_string($key)) {
-            return $this->configBag->get($key, $default);
-        } elseif (is_array($key)) {
-            return $this->configBag->set($key);
-        } else {
-            throw new InvalidArgumentException('Invalid ConfigBag passed method arguments');
         }
+
+        if (is_string($key)) {
+            return $this->configBag->get($key, $default);
+        }
+
+        if (is_array($key)) {
+            return $this->configBag->set($key);
+        }
+
+        throw new InvalidArgumentException('Invalid ConfigBag passed method arguments');
     }
 
     /**
