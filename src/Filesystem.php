@@ -58,9 +58,14 @@ class Filesystem
             $composerFs = static::getDelegateFs();
             return $composerFs->{$method}(...$parameters);
         } catch (Throwable $e) {
-            throw new BadMethodCallException(sprintf(
-                 'ComposerFilesystem method [%s] call return exception >> [%s]', $method, $e->getMessage()
-             ));
+            throw new BadMethodCallException(
+                sprintf(
+                    'Delegate [%s] method [%s] call return an exception: %s',
+                    ComposerFs::class,
+                    $method,
+                    $e->getMessage()
+                )
+            );
         }
     }
 
