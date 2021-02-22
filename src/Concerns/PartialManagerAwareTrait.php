@@ -4,33 +4,36 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Concerns;
 
-use Pollen\Partial\Partial;
-use Pollen\Partial\PartialInterface;
+use Pollen\Partial\PartialManager;
+use Pollen\Partial\PartialManagerInterface;
+use Psr\Container\ContainerInterface as Container;
 use Throwable;
 
 trait PartialManagerAwareTrait
 {
     /**
      * Instance du gestionnaire de portions d'affichage.
-     * @var PartialInterface
+     * @var PartialManagerInterface
      */
     private $partialManager;
 
     /**
      * Instance du gestionnaire de portions d'affichage.
      *
-     * @return PartialInterface
+     * @return PartialManagerInterface
      */
-    public function partialManager(): PartialInterface
+    public function partialManager(): PartialManagerInterface
     {
         if ($this->partialManager === null) {
-            if (in_array(ContainerAwareTrait::class, class_uses($this), true) && $this->containerHas(PartialInterface::class)) {
-                $this->partialManager = $this->containerGet(PartialInterface::class);
+            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
+
+            if ($container instanceof Container && $container->has(PartialManagerInterface::class)) {
+                $this->partialManager = $container->get(PartialManagerInterface::class);
             } else {
                 try {
-                    $this->partialManager = Partial::instance();
+                    $this->partialManager = PartialManager::instance();
                 } catch(Throwable $e) {
-                    $this->partialManager = new Partial();
+                    $this->partialManager = new PartialManager();
                 }
             }
         }
@@ -41,11 +44,11 @@ trait PartialManagerAwareTrait
     /**
      * Définition du gestionnaire de portion d'affichage.
      *
-     * @param PartialInterface $partialManager
+     * @param PartialManagerInterface $partialManager
      *
      * @return static
      */
-    public function setPartialManager(PartialInterface $partialManager): self
+    public function setPartialManager(PartialManagerInterface $partialManager): self
     {
         $this->partialManager = $partialManager;
 
