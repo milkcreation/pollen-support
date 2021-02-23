@@ -7,7 +7,7 @@ namespace Pollen\Support\Concerns;
 trait BootableTrait
 {
     /**
-     * Etat de chargement.
+     * État de chargement.
      * @var bool
      */
     private $booted = false;
@@ -29,7 +29,7 @@ trait BootableTrait
      *
      * @return static
      */
-    public function setBooted(bool $booted = true): self
+    public function setBooted(bool $booted = true): BootableTrait
     {
         $this->booted = $booted;
 
