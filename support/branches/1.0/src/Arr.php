@@ -67,7 +67,7 @@ class Arr extends BaseArr
     public static function insertAfter(array $array, $new, $key): array
     {
         $keys = array_keys($array);
-        $index = array_search($key, $keys);
+        $index = array_search($key, $keys, true);
         $pos = false === $index ? count($array) : $index;
 
         return array_merge(
