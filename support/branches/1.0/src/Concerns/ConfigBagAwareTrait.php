@@ -7,7 +7,7 @@ namespace Pollen\Support\Concerns;
 use Pollen\Support\ParamsBag;
 use InvalidArgumentException;
 
-trait ConfigBagTrait
+trait ConfigBagAwareTrait
 {
     /**
      * Instance du gestionnaire de paramètres de configuration.

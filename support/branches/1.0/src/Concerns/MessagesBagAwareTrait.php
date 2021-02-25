@@ -6,7 +6,7 @@ namespace Pollen\Support\Concerns;
 
 use Pollen\Support\MessagesBag;
 
-trait MessagesBagTrait
+trait MessagesBagAwareTrait
 {
     /**
      * Instance du gestionnaire des messages.
