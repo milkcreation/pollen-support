@@ -7,7 +7,7 @@ namespace Pollen\Support\Concerns;
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
 use Psr\Container\ContainerInterface as Container;
-use Throwable;
+use RuntimeException;
 
 trait PartialManagerAwareTrait
 {
@@ -31,8 +31,8 @@ trait PartialManagerAwareTrait
                 $this->partialManager = $container->get(PartialManagerInterface::class);
             } else {
                 try {
-                    $this->partialManager = PartialManager::instance();
-                } catch(Throwable $e) {
+                    $this->partialManager = PartialManager::getInstance();
+                } catch(RuntimeException $e) {
                     $this->partialManager = new PartialManager();
                 }
             }
@@ -42,7 +42,7 @@ trait PartialManagerAwareTrait
     }
 
     /**
-     * Définition du gestionnaire de portion d'affichage.
+     * Définition du gestionnaire de portions d'affichage.
      *
      * @param PartialManagerInterface $partialManager
      *

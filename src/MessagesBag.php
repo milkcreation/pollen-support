@@ -300,9 +300,10 @@ class MessagesBag implements MessagesBagInterface
     {
         $code = $code ?: Str::random();
 
+        $this->records()->push("codes.{$level}", $code);
+
         $this->records(
             [
-                "codes.{$level}"            => $code,
                 "messages.{$level}.{$code}" => $message,
                 "contexts.{$level}.{$code}" => $context,
             ]
