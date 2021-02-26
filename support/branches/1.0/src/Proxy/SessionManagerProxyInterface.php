@@ -20,7 +20,7 @@ interface SessionManagerProxyInterface
      *
      * @param SessionManagerInterface $sessionManager
      *
-     * @return SessionManagerProxy
+     * @return SessionManagerProxy|static
      */
     public function setSessionManager(SessionManagerInterface $sessionManager): SessionManagerProxy;
 }

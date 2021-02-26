@@ -107,7 +107,7 @@ class ParamsBag implements ParamsBagInterface
     /**
      * @inheritDoc
      */
-    public function get(string $key, $default = '')
+    public function get(string $key, $default = null)
     {
         return Arr::get($this->attributes, $key, $default);
     }

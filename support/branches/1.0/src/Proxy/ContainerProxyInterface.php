@@ -38,7 +38,7 @@ interface ContainerProxyInterface
      *
      * @param Container $container
      *
-     * @return ContainerProxy
+     * @return ContainerProxy|static
      */
     public function setContainer(Container $container): ContainerProxy;
 }

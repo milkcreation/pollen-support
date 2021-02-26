@@ -17,7 +17,7 @@ interface BuildableTraitInterface
      *
      * @param bool $built
      *
-     * @return BuildableTrait
+     * @return BuildableTrait|static
      */
     public function setBuilt(bool $built = true): BuildableTrait;
 }
