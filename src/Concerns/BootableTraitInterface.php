@@ -18,7 +18,7 @@ interface BootableTraitInterface
      *
      * @param bool $booted
      *
-     * @return BootableTrait
+     * @return BootableTrait|static
      */
     public function setBooted(bool $booted = true): BootableTrait;
 }

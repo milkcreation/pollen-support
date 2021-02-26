@@ -20,7 +20,7 @@ interface FormManagerProxyInterface
      *
      * @param FormManagerInterface $formManager
      *
-     * @return FormManagerProxy
+     * @return FormManagerProxy|static
      */
     public function setFormManager(FormManagerInterface $formManager): FormManagerProxy;
 }

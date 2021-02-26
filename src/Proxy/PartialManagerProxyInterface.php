@@ -20,7 +20,7 @@ interface PartialManagerProxyInterface
      *
      * @param PartialManagerInterface $partialManager
      *
-     * @return PartialManagerProxy
+     * @return PartialManagerProxy|static
      */
     public function setPartialManager(PartialManagerInterface $partialManager): PartialManagerProxy;
 }

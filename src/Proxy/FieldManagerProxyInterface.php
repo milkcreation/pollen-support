@@ -20,7 +20,7 @@ Interface FieldManagerProxyInterface
      *
      * @param FieldManagerInterface $fieldManager
      *
-     * @return FieldManagerProxy
+     * @return FieldManagerProxy|static
      */
     public function setFieldManager(FieldManagerInterface $fieldManager): FieldManagerProxy;
 }
