@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pollen\Support;
 
 use BadMethodCallException;
+use Exception;
 use Composer\Util\Filesystem as ComposerFs;
 use Throwable;
 
@@ -47,16 +48,20 @@ class Filesystem
     /**
      * Délégation d'appel des méthodes du système de fichier de composer.
      *
-     * @param string string $method
-     * @param array $parameters
+     * @param string $method
+     * @param array $arguments
      *
      * @return mixed
+     *
+     * @throws Exception
      */
-    public static function __callStatic(string $method, array $parameters)
+    public static function __callStatic(string $method, array $arguments)
     {
         try {
             $composerFs = static::getDelegateFs();
-            return $composerFs->{$method}(...$parameters);
+            return $composerFs->{$method}(...$arguments);
+        } catch (Exception $e) {
+            throw $e;
         } catch (Throwable $e) {
             throw new BadMethodCallException(
                 sprintf(
@@ -64,7 +69,7 @@ class Filesystem
                     ComposerFs::class,
                     $method,
                     $e->getMessage()
-                )
+                ), 0, $e
             );
         }
     }

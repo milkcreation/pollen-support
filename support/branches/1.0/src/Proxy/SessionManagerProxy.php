@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Session\SessionManager;
 use Pollen\Session\SessionManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
-trait SessionManagerAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\SessionManagerProxyInterface
+ */
+trait SessionManagerProxy
 {
     /**
      * Instance du gestionnaire de sessions.
@@ -48,7 +51,7 @@ trait SessionManagerAwareTrait
      *
      * @return static
      */
-    public function setSessionManager(SessionManagerInterface $sessionManager): self
+    public function setSessionManager(SessionManagerInterface $sessionManager): SessionManagerProxy
     {
         $this->sessionManager = $sessionManager;
 

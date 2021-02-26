@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Pollen\Support;
 
 use ArrayIterator;
-use ArrayAccess;
-use Countable;
-use IteratorAggregate;
+use Exception;
+use Pollen\Support\Exception\JsonException;
 
-class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
+class ParamsBag implements ParamsBagInterface
 {
     /**
      * Liste des paramètres.
@@ -26,15 +25,15 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
      */
     public static function createFromAttrs($attrs): self
     {
-        return (new static())->set($attrs)->parse();
+        $paramBag = new static();
+        $paramBag->set($attrs);
+        $paramBag->parse();
+
+        return $paramBag;
     }
 
     /**
-     * Récupération d'un élément d'itération.
-     *
-     * @param string|int $key Clé d'indexe.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function __get($key)
     {
@@ -42,12 +41,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Définition d'un élément d'itération.
-     *
-     * @param string|int $key Clé d'indexe.
-     * @param mixed $value Valeur.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function __set($key, $value): void
     {
@@ -55,11 +49,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Vérification d'existance d'un élément d'itération.
-     *
-     * @param string|int $key Clé d'indexe.
-     *
-     * @return boolean
+     * @inheritDoc
      */
     public function __isset($key): bool
     {
@@ -67,11 +57,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Suppression d'un élément d'itération.
-     *
-     * @param string|int $key Clé d'indexe.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function __unset($key): void
     {
@@ -79,9 +65,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Récupération de la liste des attributs.
-     *
-     * @return array
+     * @inheritDoc
      */
     public function all(): array
     {
@@ -89,21 +73,15 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Suppression de la liste des attributs déclarés.
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function clear(): self
+    public function clear(): void
     {
         $this->attributes = [];
-
-        return $this;
     }
 
     /**
-     * Compte le nombre d'éléments.
-     *
-     * @return int
+     * @inheritDoc
      */
     public function count(): int
     {
@@ -111,9 +89,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Définition de la liste des attributs par défaut.
-     *
-     * @return array
+     * @inheritDoc
      */
     public function defaults(): array
     {
@@ -121,11 +97,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Suppression d'un ou plusieurs attributs.
-     *
-     * @param array|string $keys Liste des indices des attributs à supprimer. Syntaxe à point permise.
-     *
-     * @return void
+     * @inheritDoc
      */
     public function forget($keys): void
     {
@@ -133,12 +105,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Récupération d'un attribut.
-     *
-     * @param string $key Clé d'indexe de l'attribut. Syntaxe à point permise.
-     * @param mixed $default Valeur de retour par defaut lorsque l'attribut n'est pas défini.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function get(string $key, $default = '')
     {
@@ -148,40 +115,35 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     /**
      * @inheritDoc
      */
-    public function getIterator()
+    public function getIterator(): iterable
     {
         return new ArrayIterator($this->attributes);
     }
 
     /**
-     * Vérification d'existance d'un attribut de configuration.
-     *
-     * @param string $key Clé d'indexe de l'attribut. Syntaxe à point permise.
-     *
-     * @return mixed
+     * @inheritDoc
      */
-    public function has(string $key)
+    public function has(string $key): bool
     {
         return Arr::has($this->attributes, $key);
     }
 
     /**
-     * Récupération de la liste des paramètres au format json.
-     * @see http://php.net/manual/fr/function.json-encode.php
-     *
-     * @param int $options Options d'encodage.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function json($options = 0): string
     {
-        return json_encode($this->all(), $options);
+        try {
+            $json = json_encode($this->all(), $options|JSON_THROW_ON_ERROR);
+        } catch (Exception  $e) {
+            throw new JsonException($e->getMessage(), $e->getCode(), $e);
+        }
+
+        return $json;
     }
 
     /**
-     * Récupération de la liste des clés d'indexes des attributs de configuration.
-     *
-     * @return string[]
+     * @inheritDoc
      */
     public function keys(): array
     {
@@ -189,16 +151,10 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Cartographie de donnée.
-     *
-     * @param mixed $value
-     * @param string|int $key
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function map(&$value, $key): self
+    public function map(&$value, $key): void
     {
-        return $this;
     }
 
     /**
@@ -234,11 +190,7 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Récupération d'un jeu d'attributs associé à une liste de clés d'indices.
-     *
-     * @param string[] $keys Liste des clés d'indice du jeu d'attributs à récupérer.
-     *
-     * @return array
+     * @inheritDoc
      */
     public function only(array $keys): array
     {
@@ -246,24 +198,15 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Traitement de la liste des attributs.
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function parse(): self
+    public function parse(): void
     {
         $this->attributes = array_merge($this->defaults(), $this->attributes);
-
-        return $this;
     }
 
     /**
-     * Récupére la valeur d'un attribut avant de le supprimer.
-     *
-     * @param string $key Clé d'indexe de l'attribut. Syntaxe à point permise.
-     * @param mixed $default Valeur de retour par defaut lorsque l'attribut n'est pas défini.
-     *
-     * @return mixed
+     * @inheritDoc
      */
     public function pull(string $key, $default = null)
     {
@@ -271,14 +214,9 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * Insertion d'un attribut à la fin d'une liste d'attributs.
-     *
-     * @param string $key Clé d'indexe de l'attribut. Syntaxe à point permise.
-     * @param mixed $value Valeur de l'attribut.
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function push(string $key, $value): self
+    public function push(string $key, $value): void
     {
         if (!$this->has($key)) {
             $this->set($key, []);
@@ -290,20 +228,12 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
             $arr[] = $value;
             $this->set($key, $arr);
         }
-
-        return $this;
     }
 
     /**
-     * Définition d'un attribut.
-     *
-     * @param string|array $key Clé d'indexe de l'attribut, Syntaxe à point permise ou tableau associatif des attributs
-     *                          à définir.
-     * @param mixed $value Valeur de l'attribut si la clé d'index est de type string.
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function set($key, $value = null): self
+    public function set($key, $value = null): void
     {
         $keys = is_array($key) ? $key : [$key => $value];
 
@@ -312,19 +242,11 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
         foreach ($keys as $k => $v) {
             Arr::set($this->attributes, $k, $v);
         }
-
-        return $this;
     }
-
     /**
-     * Insertion d'un attribut au début d'une liste d'attributs.
-     *
-     * @param mixed $value Valeur de l'attribut.
-     * @param string $key Clé d'indexe de l'attribut. Syntaxe à point permise.
-     *
-     * @return static
+     * @inheritDoc
      */
-    public function unshift($value, string $key): self
+    public function unshift($value, string $key): void
     {
         if (!$this->has($key)) {
             $this->set($key, []);
@@ -336,14 +258,10 @@ class ParamsBag implements ArrayAccess, Countable, IteratorAggregate
             array_unshift($arr, $value);
             $this->set($key, $arr);
         }
-
-        return $this;
     }
 
     /**
-     * Récupération de la liste des valeurs des attributs de configuration.
-     *
-     * @return mixed[]
+     * @inheritDoc
      */
     public function values(): array
     {

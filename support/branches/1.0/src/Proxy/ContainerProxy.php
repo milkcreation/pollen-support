@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Psr\Container\ContainerInterface as Container;
 
-trait ContainerAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\ContainerProxy
+ */
+trait ContainerProxy
 {
     /**
      * Instance du conteneur d'injection de dépendance.
@@ -55,7 +58,7 @@ trait ContainerAwareTrait
      *
      * @return static
      */
-    public function setContainer(Container $container): self
+    public function setContainer(Container $container): ContainerProxy
     {
         $this->container = $container;
 

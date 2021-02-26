@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Concerns;
 
+/**
+ * @see \Pollen\Support\Concerns\BootableTraitInterface
+ */
 trait BootableTrait
 {
     /**

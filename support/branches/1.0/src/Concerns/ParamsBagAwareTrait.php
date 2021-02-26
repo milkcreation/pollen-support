@@ -13,7 +13,7 @@ trait ParamsBagAwareTrait
      * Instance du gestionnaire de paramètres
      * @var ParamsBag|null
      */
-    protected $paramsBag;
+    private $paramsBag;
 
     /**
      * Liste des paramètres par défaut.
@@ -50,7 +50,8 @@ trait ParamsBagAwareTrait
         }
 
         if (is_array($key)) {
-            return $this->paramsBag->set($key);
+            $this->paramsBag->set($key);
+            return $this->paramsBag;
         }
 
         throw new InvalidArgumentException('Invalid ParamsBag passed method arguments');
@@ -59,11 +60,10 @@ trait ParamsBagAwareTrait
     /**
      * Traitement de la liste des paramètres.
      *
-     * @return static
+     * @return void
      */
-    public function parseParams(): self
+    public function parseParams(): void
     {
-        return $this;
     }
 
     /**
@@ -73,7 +73,7 @@ trait ParamsBagAwareTrait
      *
      * @return static
      */
-    public function setParams(array $params): self
+    public function setParams(array $params): ParamsBagAwareTrait
     {
         $this->params($params);
 
