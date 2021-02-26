@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Event\EventDispatcher;
 use Pollen\Event\EventDispatcherInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
-trait EventDispatcherAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\EventDispatcherProxyInterface
+ */
+trait EventDispatcherProxy
 {
     /**
      * Instance du répartiteur d'événements.
@@ -48,7 +51,7 @@ trait EventDispatcherAwareTrait
      *
      * @return static
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): self
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventDispatcherProxy
     {
         $this->eventDispatcher = $eventDispatcher;
 

@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Form\FormManager;
 use Pollen\Form\FormManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
-trait FormManagerAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\FormManagerProxyInterface
+ */
+trait FormManagerProxy
 {
     /**
      * Instance du gestionnaire de formulaires.
@@ -48,7 +51,7 @@ trait FormManagerAwareTrait
      *
      * @return static
      */
-    public function setFormManager(FormManagerInterface $formManager): self
+    public function setFormManager(FormManagerInterface $formManager): FormManagerProxy
     {
         $this->formManager = $formManager;
 

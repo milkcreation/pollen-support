@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
-trait PartialManagerAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\PartialManagerProxyInterface
+ */
+trait PartialManagerProxy
 {
     /**
      * Instance du gestionnaire de portions d'affichage.
@@ -48,7 +51,7 @@ trait PartialManagerAwareTrait
      *
      * @return static
      */
-    public function setPartialManager(PartialManagerInterface $partialManager): self
+    public function setPartialManager(PartialManagerInterface $partialManager): PartialManagerProxy
     {
         $this->partialManager = $partialManager;
 

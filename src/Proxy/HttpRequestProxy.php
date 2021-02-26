@@ -2,14 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Http\Request;
 use Pollen\Http\RequestInterface;
 use Psr\Container\ContainerInterface as Container;
 use Psr\Http\Message\ServerRequestInterface as PsrRequestInterface;
+use Symfony\Component\HttpFoundation\Request as BaseRequest;
 
-trait HttpRequestAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\HttpRequestProxyInterface
+ */
+trait HttpRequestProxy
 {
     /**
      * Instance de la requête HTTP.
@@ -20,7 +24,7 @@ trait HttpRequestAwareTrait
     /**
      * Instance de la requête HTTP.
      *
-     * @return RequestInterface
+     * @return RequestInterface|BaseRequest
      */
     public function httpRequest(): RequestInterface
     {
@@ -54,7 +58,7 @@ trait HttpRequestAwareTrait
      *
      * @return static
      */
-    public function setHttpRequest(RequestInterface $httpRequest): self
+    public function setHttpRequest(RequestInterface $httpRequest): HttpRequestProxy
     {
         $this->httpRequest = $httpRequest;
 

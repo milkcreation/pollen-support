@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Pollen\Support\Concerns;
+namespace Pollen\Support\Proxy;
 
 use Pollen\Field\FieldManager;
 use Pollen\Field\FieldManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
-trait FieldManagerAwareTrait
+/**
+ * @see \Pollen\Support\Proxy\FieldManagerProxyInterface
+ */
+trait FieldManagerProxy
 {
     /**
      * Instance du gestionnaire de champs.
@@ -48,7 +51,7 @@ trait FieldManagerAwareTrait
      *
      * @return static
      */
-    public function setFieldManager(FieldManagerInterface $fieldManager): self
+    public function setFieldManager(FieldManagerInterface $fieldManager): FieldManagerProxy
     {
         $this->fieldManager = $fieldManager;
 

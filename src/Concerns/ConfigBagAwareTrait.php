@@ -7,13 +7,16 @@ namespace Pollen\Support\Concerns;
 use Pollen\Support\ParamsBag;
 use InvalidArgumentException;
 
+/**
+ * @see \Pollen\Support\Concerns\ConfigBagAwareTraitInterface
+ */
 trait ConfigBagAwareTrait
 {
     /**
      * Instance du gestionnaire de paramètres de configuration.
      * @var ParamsBag|null
      */
-    protected $configBag;
+    private $configBag;
 
     /**
      * Liste des paramètres de configuration par défaut.
@@ -59,11 +62,10 @@ trait ConfigBagAwareTrait
     /**
      * Traitement de la liste des paramètres de configuration.
      *
-     * @return static
+     * @return void
      */
-    public function parseConfig(): self
+    public function parseConfig(): void
     {
-        return $this;
     }
 
     /**
@@ -73,7 +75,7 @@ trait ConfigBagAwareTrait
      *
      * @return static
      */
-    public function setConfig(array $params): self
+    public function setConfig(array $params): ConfigBagAwareTrait
     {
         $this->config($params);
 

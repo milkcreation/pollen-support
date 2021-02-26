@@ -6,6 +6,9 @@ namespace Pollen\Support\Concerns;
 
 use Pollen\Support\MessagesBag;
 
+/**
+ * @see \Pollen\Support\Concerns\MessagesBagAwareTraitInterface
+ */
 trait MessagesBagAwareTrait
 {
     /**
@@ -36,5 +39,19 @@ trait MessagesBagAwareTrait
         $level = MessagesBag::toMessageBagLevel($level);
 
         return $this->messagesBag->log($level, $message, $datas);
+    }
+
+    /**
+     * Définition de l'instance du gestionnaire de messages.
+     *
+     * @param MessagesBag $messagesBag
+     *
+     * @return static
+     */
+    public function setMessagesBag(MessagesBag $messagesBag): MessagesBagAwareTrait
+    {
+        $this->messagesBag = $messagesBag;
+
+        return $this;
     }
 }
