@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use Pollen\Form\FormInterface;
 use Pollen\Form\FormManager;
 use Pollen\Form\FormManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\FormManagerProxyInterface
+ * @see \Pollen\Support\Proxy\FormProxyInterface
  */
-trait FormManagerProxy
+trait FormProxy
 {
     /**
      * Instance du gestionnaire de formulaires.
@@ -21,11 +22,13 @@ trait FormManagerProxy
     private $formManager;
 
     /**
-     * Instance du gestionnaire de formulaires.
+     * Instance du gestionnaire de formulaires|Instance d'un formulaire.
      *
-     * @return FormManagerInterface
+     * @param string|null $alias
+     *
+     * @return FormManagerInterface|FormInterface
      */
-    public function formManager(): FormManagerInterface
+    public function form(?string $alias = null)
     {
         if ($this->formManager === null) {
             $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
@@ -41,7 +44,7 @@ trait FormManagerProxy
             }
         }
 
-        return $this->formManager;
+        return $alias === null ? $this->formManager: $this->formManager->get($alias);
     }
 
     /**
@@ -51,7 +54,7 @@ trait FormManagerProxy
      *
      * @return static
      */
-    public function setFormManager(FormManagerInterface $formManager): FormManagerProxy
+    public function setFormManager(FormManagerInterface $formManager): FormProxy
     {
         $this->formManager = $formManager;
 

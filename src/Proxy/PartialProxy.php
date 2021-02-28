@@ -10,9 +10,9 @@ use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\PartialManagerProxyInterface
+ * @see \Pollen\Support\Proxy\PartialProxyInterface
  */
-trait PartialManagerProxy
+trait PartialProxy
 {
     /**
      * Instance du gestionnaire de portions d'affichage.
@@ -21,11 +21,15 @@ trait PartialManagerProxy
     private $partialManager;
 
     /**
-     * Instance du gestionnaire de portions d'affichage.
+     * Instance du gestionnaire de portions d'affichage|Instance d'une portion d'affichage.
+     *
+     * @param string|null $alias Alias de qualification.
+     * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
+     * @param array $params Liste des attributs de configuration.
      *
      * @return PartialManagerInterface
      */
-    public function partialManager(): PartialManagerInterface
+    public function partial(?string $alias = null, $idOrParams = null, array $params = [])
     {
         if ($this->partialManager === null) {
             $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
@@ -41,7 +45,7 @@ trait PartialManagerProxy
             }
         }
 
-        return $this->partialManager;
+        return $alias === null ? $this->partialManager: $this->partialManager->get($alias, $idOrParams, $params);
     }
 
     /**
@@ -51,7 +55,7 @@ trait PartialManagerProxy
      *
      * @return static
      */
-    public function setPartialManager(PartialManagerInterface $partialManager): PartialManagerProxy
+    public function setPartialManager(PartialManagerInterface $partialManager): PartialProxy
     {
         $this->partialManager = $partialManager;
 

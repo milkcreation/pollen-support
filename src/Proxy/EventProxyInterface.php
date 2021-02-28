@@ -6,21 +6,21 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Event\EventDispatcherInterface;
 
-interface EventDispatcherProxyInterface
+interface EventProxyInterface
 {
     /**
      * Instance du répartiteur d'événements.
      *
      * @return EventDispatcherInterface
      */
-    public function eventDispatcher(): EventDispatcherInterface;
+    public function event(): EventDispatcherInterface;
 
     /**
      * Définition du gestionnaire de events.
      *
      * @param EventDispatcherInterface $eventDispatcher
      *
-     * @return EventDispatcherProxy|static
+     * @return EventProxy|static
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventDispatcherProxy;
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventProxy;
 }
