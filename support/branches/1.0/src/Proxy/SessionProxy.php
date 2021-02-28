@@ -10,9 +10,9 @@ use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\SessionManagerProxyInterface
+ * @see \Pollen\Support\Proxy\SessionProxyInterface
  */
-trait SessionManagerProxy
+trait SessionProxy
 {
     /**
      * Instance du gestionnaire de sessions.
@@ -25,7 +25,7 @@ trait SessionManagerProxy
      *
      * @return SessionManagerInterface
      */
-    public function sessionManager(): SessionManagerInterface
+    public function session(): SessionManagerInterface
     {
         if ($this->sessionManager === null) {
             $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
@@ -51,7 +51,7 @@ trait SessionManagerProxy
      *
      * @return static
      */
-    public function setSessionManager(SessionManagerInterface $sessionManager): SessionManagerProxy
+    public function setSessionManager(SessionManagerInterface $sessionManager): SessionProxy
     {
         $this->sessionManager = $sessionManager;
 

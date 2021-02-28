@@ -10,9 +10,9 @@ use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\EventDispatcherProxyInterface
+ * @see \Pollen\Support\Proxy\EventProxyInterface
  */
-trait EventDispatcherProxy
+trait EventProxy
 {
     /**
      * Instance du répartiteur d'événements.
@@ -25,7 +25,7 @@ trait EventDispatcherProxy
      *
      * @return EventDispatcherInterface
      */
-    public function eventDispatcher(): EventDispatcherInterface
+    public function event(): EventDispatcherInterface
     {
         if ($this->eventDispatcher === null) {
             $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
@@ -51,7 +51,7 @@ trait EventDispatcherProxy
      *
      * @return static
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventDispatcherProxy
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventProxy
     {
         $this->eventDispatcher = $eventDispatcher;
 

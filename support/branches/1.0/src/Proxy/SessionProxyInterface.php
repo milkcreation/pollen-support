@@ -6,21 +6,21 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Session\SessionManagerInterface;
 
-interface SessionManagerProxyInterface
+interface SessionProxyInterface
 {
     /**
      * Instance du gestionnaire de sessions.
      *
      * @return SessionManagerInterface
      */
-    public function sessionManager(): SessionManagerInterface;
+    public function session(): SessionManagerInterface;
 
     /**
      * Définition du gestionnaire de sessions.
      *
      * @param SessionManagerInterface $sessionManager
      *
-     * @return SessionManagerProxy|static
+     * @return SessionProxy|static
      */
-    public function setSessionManager(SessionManagerInterface $sessionManager): SessionManagerProxy;
+    public function setSessionManager(SessionManagerInterface $sessionManager): SessionProxy;
 }

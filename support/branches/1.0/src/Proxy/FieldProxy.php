@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use Pollen\Field\FieldDriverInterface;
 use Pollen\Field\FieldManager;
 use Pollen\Field\FieldManagerInterface;
 use Psr\Container\ContainerInterface as Container;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\FieldManagerProxyInterface
+ * @see \Pollen\Support\Proxy\FieldProxyInterface
  */
-trait FieldManagerProxy
+trait FieldProxy
 {
     /**
      * Instance du gestionnaire de champs.
@@ -21,11 +22,15 @@ trait FieldManagerProxy
     private $fieldManager;
 
     /**
-     * Instance du gestionnaire de champs.
+     * Instance du gestionnaire de champs|Instance d'un champs.
      *
-     * @return FieldManagerInterface
+     * @param string|null $alias Alias de qualification.
+     * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
+     * @param array $params Liste des attributs de configuration.
+     *
+     * @return FieldManagerInterface|FieldDriverInterface
      */
-    public function fieldManager(): FieldManagerInterface
+    public function field(?string $alias = null, $idOrParams = null, array $params = [])
     {
         if ($this->fieldManager === null) {
             $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
@@ -41,7 +46,7 @@ trait FieldManagerProxy
             }
         }
 
-        return $this->fieldManager;
+        return $alias === null ? $this->fieldManager : $this->fieldManager->get($alias, $idOrParams, $params);
     }
 
     /**
@@ -51,7 +56,7 @@ trait FieldManagerProxy
      *
      * @return static
      */
-    public function setFieldManager(FieldManagerInterface $fieldManager): FieldManagerProxy
+    public function setFieldManager(FieldManagerInterface $fieldManager): FieldProxy
     {
         $this->fieldManager = $fieldManager;
 
