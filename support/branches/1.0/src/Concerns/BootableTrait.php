@@ -32,7 +32,7 @@ trait BootableTrait
      *
      * @return static
      */
-    public function setBooted(bool $booted = true): BootableTrait
+    public function setBooted(bool $booted = true): self
     {
         $this->booted = $booted;
 

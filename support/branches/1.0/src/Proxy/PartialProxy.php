@@ -55,7 +55,7 @@ trait PartialProxy
      *
      * @return static
      */
-    public function setPartialManager(PartialManagerInterface $partialManager): PartialProxy
+    public function setPartialManager(PartialManagerInterface $partialManager): self
     {
         $this->partialManager = $partialManager;
 

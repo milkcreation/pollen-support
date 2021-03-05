@@ -75,7 +75,7 @@ trait ConfigBagAwareTrait
      *
      * @return static
      */
-    public function setConfig(array $params): ConfigBagAwareTrait
+    public function setConfig(array $params): self
     {
         $this->config($params);
 

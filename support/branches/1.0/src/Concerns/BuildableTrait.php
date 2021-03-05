@@ -31,7 +31,7 @@ trait BuildableTrait
      *
      * @return static
      */
-    public function setBuilt(bool $built = true): BuildableTrait
+    public function setBuilt(bool $built = true): self
     {
         $this->built = $built;
 

@@ -51,7 +51,7 @@ trait MailerProxy
      *
      * @return static
      */
-    public function setMailer(MailerInterface $mailer): MailerProxy
+    public function setMailer(MailerInterface $mailer): self
     {
         $this->mailer = $mailer;
 

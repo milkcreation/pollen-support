@@ -48,7 +48,7 @@ trait MessagesBagAwareTrait
      *
      * @return static
      */
-    public function setMessagesBag(MessagesBag $messagesBag): MessagesBagAwareTrait
+    public function setMessagesBag(MessagesBag $messagesBag): self
     {
         $this->messagesBag = $messagesBag;
 

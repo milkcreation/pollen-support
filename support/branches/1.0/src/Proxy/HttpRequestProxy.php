@@ -58,7 +58,7 @@ trait HttpRequestProxy
      *
      * @return static
      */
-    public function setHttpRequest(RequestInterface $httpRequest): HttpRequestProxy
+    public function setHttpRequest(RequestInterface $httpRequest): self
     {
         $this->httpRequest = $httpRequest;
 

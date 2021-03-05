@@ -54,7 +54,7 @@ trait FormProxy
      *
      * @return static
      */
-    public function setFormManager(FormManagerInterface $formManager): FormProxy
+    public function setFormManager(FormManagerInterface $formManager): self
     {
         $this->formManager = $formManager;
 

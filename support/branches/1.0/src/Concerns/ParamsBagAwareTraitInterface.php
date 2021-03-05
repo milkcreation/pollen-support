@@ -40,7 +40,7 @@ interface ParamsBagAwareTraitInterface
      *
      * @param array $params
      *
-     * @return ParamsBagAwareTrait|static
+     * @return static
      */
-    public function setParams(array $params): ParamsBagAwareTrait;
+    public function setParams(array $params): self;
 }

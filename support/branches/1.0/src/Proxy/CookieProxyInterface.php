@@ -24,7 +24,7 @@ interface CookieProxyInterface
      *
      * @param CookieJarInterface $cookieJar
      *
-     * @return CookieProxy|static
+     * @return static
      */
-    public function setCookieJar(CookieJarInterface $cookieJar): CookieProxy;
+    public function setCookieJar(CookieJarInterface $cookieJar): self;
 }

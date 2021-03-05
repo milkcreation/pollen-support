@@ -51,7 +51,7 @@ trait RouterProxy
      *
      * @return static
      */
-    public function setRouter(RouterInterface $router): RouterProxy
+    public function setRouter(RouterInterface $router): self
     {
         $this->router = $router;
 

@@ -20,7 +20,7 @@ interface MetaboxProxyInterface
      *
      * @param MetaboxManagerInterface $metaboxManager
      *
-     * @return MetaboxProxy|static
+     * @return static
      */
-    public function setMetaboxManager(MetaboxManagerInterface $metaboxManager): MetaboxProxy;
+    public function setMetaboxManager(MetaboxManagerInterface $metaboxManager): self;
 }

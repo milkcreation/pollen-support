@@ -24,7 +24,7 @@ interface MessagesBagAwareTraitInterface
      *
      * @param MessagesBag $messagesBag
      *
-     * @return MessagesBagAwareTrait|static
+     * @return static
      */
-    public function setMessagesBag(MessagesBag $messagesBag): MessagesBagAwareTrait;
+    public function setMessagesBag(MessagesBag $messagesBag): self;
 }
