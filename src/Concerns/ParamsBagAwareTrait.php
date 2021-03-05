@@ -73,7 +73,7 @@ trait ParamsBagAwareTrait
      *
      * @return static
      */
-    public function setParams(array $params): ParamsBagAwareTrait
+    public function setParams(array $params): self
     {
         $this->params($params);
 

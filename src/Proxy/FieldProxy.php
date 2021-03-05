@@ -56,7 +56,7 @@ trait FieldProxy
      *
      * @return static
      */
-    public function setFieldManager(FieldManagerInterface $fieldManager): FieldProxy
+    public function setFieldManager(FieldManagerInterface $fieldManager): self
     {
         $this->fieldManager = $fieldManager;
 

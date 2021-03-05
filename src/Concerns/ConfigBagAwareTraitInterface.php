@@ -40,7 +40,7 @@ interface ConfigBagAwareTraitInterface
      *
      * @param array $params
      *
-     * @return ConfigBagAwareTrait|static
+     * @return static
      */
-    public function setConfig(array $params): ConfigBagAwareTrait;
+    public function setConfig(array $params): self;
 }

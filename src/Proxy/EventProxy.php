@@ -51,7 +51,7 @@ trait EventProxy
      *
      * @return static
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): EventProxy
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): self
     {
         $this->eventDispatcher = $eventDispatcher;
 

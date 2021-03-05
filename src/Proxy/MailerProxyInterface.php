@@ -20,7 +20,7 @@ interface MailerProxyInterface
      *
      * @param MailerInterface $mailer
      *
-     * @return MailerProxy
+     * @return static
      */
-    public function setMailer(MailerInterface $mailer): MailerProxy;
+    public function setMailer(MailerInterface $mailer): self;
 }

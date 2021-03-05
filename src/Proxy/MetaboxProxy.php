@@ -51,7 +51,7 @@ trait MetaboxProxy
      *
      * @return static
      */
-    public function setMetaboxManager(MetaboxManagerInterface $metaboxManager): MetaboxProxy
+    public function setMetaboxManager(MetaboxManagerInterface $metaboxManager): self
     {
         $this->metaboxManager = $metaboxManager;
 

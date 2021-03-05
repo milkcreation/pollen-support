@@ -51,7 +51,7 @@ trait SessionProxy
      *
      * @return static
      */
-    public function setSessionManager(SessionManagerInterface $sessionManager): SessionProxy
+    public function setSessionManager(SessionManagerInterface $sessionManager): self
     {
         $this->sessionManager = $sessionManager;
 

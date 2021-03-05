@@ -58,7 +58,7 @@ trait ContainerProxy
      *
      * @return static
      */
-    public function setContainer(Container $container): ContainerProxy
+    public function setContainer(Container $container): self
     {
         $this->container = $container;
 

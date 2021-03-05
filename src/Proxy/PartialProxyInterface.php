@@ -25,7 +25,7 @@ interface PartialProxyInterface
      *
      * @param PartialManagerInterface $partialManager
      *
-     * @return PartialProxy|static
+     * @return static
      */
-    public function setPartialManager(PartialManagerInterface $partialManager): PartialProxy;
+    public function setPartialManager(PartialManagerInterface $partialManager): self;
 }
