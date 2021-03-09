@@ -17,6 +17,17 @@ class ParamsBag implements ParamsBagInterface
     protected $attributes = [];
 
     /**
+     * @param array $attrs
+     */
+    public function __construct(array $attrs = [])
+    {
+        if (!empty($attrs)) {
+            $this->set($attrs);
+            $this->parse();
+        }
+    }
+
+    /**
      * Création d'un instance basée sur une liste d'attributs.
      *
      * @param array Liste des attributs.
@@ -27,7 +38,6 @@ class ParamsBag implements ParamsBagInterface
     {
         $paramBag = new static();
         $paramBag->set($attrs);
-        $paramBag->parse();
 
         return $paramBag;
     }

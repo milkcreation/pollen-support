@@ -12,6 +12,13 @@ use JsonSerializable;
 interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
     /**
+     * Récupération de la liste complète des enregistrements
+     *
+     * @return array
+     */
+    public function all(): array;
+
+    /**
      * Ajout d'un message de notification.
      *
      * @param int $level

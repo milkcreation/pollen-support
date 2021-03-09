@@ -287,7 +287,9 @@ class MessagesBag implements MessagesBagInterface
         }
 
         if (is_array($key)) {
-            return $this->records->set($key);
+           $this->records->set($key);
+
+           return $this->records;
         }
 
         throw new InvalidArgumentException('Invalid ParamsBag passed method arguments');
@@ -314,6 +316,16 @@ class MessagesBag implements MessagesBagInterface
         $this->collectedRecords()->add(compact('code', 'context', 'level', 'level_name', 'message'));
 
         return $code;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): array
+    {
+        return $this->collectedRecords()->groupBy('level')->map(function (Collection $item) {
+            return $item->toArray();
+        })->all();
     }
 
     /**
