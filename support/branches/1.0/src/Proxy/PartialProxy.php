@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use Pollen\Partial\PartialDriverInterface;
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
 use Psr\Container\ContainerInterface as Container;
@@ -27,7 +28,7 @@ trait PartialProxy
      * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
      * @param array $params Liste des attributs de configuration.
      *
-     * @return PartialManagerInterface
+     * @return PartialManagerInterface|PartialDriverInterface
      */
     public function partial(?string $alias = null, $idOrParams = null, array $params = [])
     {
