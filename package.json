@@ -1,0 +1,19 @@
+{
+  "name": "@pollen-solutions/support",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jordy Manner",
+  "license": "ISC",
+  "dependencies": {
+    "animate-sass": "^0.8.2",
+    "collect.js": "^4.6.1",
+    "crypto-js": "^4.0.0",
+    "easing": "^1.2.1",
+    "hover.css": "^2.3.2",
+    "lodash": "^4.17.21",
+    "url-search-params-polyfill": "^8.0.0"
+  }
+}
