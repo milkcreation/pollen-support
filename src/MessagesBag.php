@@ -105,11 +105,11 @@ class MessagesBag implements MessagesBagInterface
     /**
      * Récupération d'un élément d'itération.
      *
-     * @param int $offset
+     * @param string $offset
      *
      * @return array
      */
-    public function __get(int $offset): array
+    public function __get(string $offset): array
     {
         return $this->offsetGet($offset);
     }
@@ -117,23 +117,23 @@ class MessagesBag implements MessagesBagInterface
     /**
      * Définition d'un élément d'itération.
      *
-     * @param int $offset
+     * @param string $offset
      * @param mixed $value
      *
      * @return void
      */
-    public function __set(int $offset, $value): void
+    public function __set(string $offset, $value): void
     {
     }
 
     /**
      * Vérification d'existence d'un élément d'itération.
      *
-     * @param int $offset
+     * @param string $offset
      *
      * @return bool
      */
-    public function __isset(int $offset): bool
+    public function __isset(string $offset): bool
     {
         return $this->offsetExists($offset);
     }
@@ -141,11 +141,11 @@ class MessagesBag implements MessagesBagInterface
     /**
      * Suppression d'un élément d'itération.
      *
-     * @param int $offset
+     * @param string $offset
      *
      * @return void
      */
-    public function __unset(int $offset): void
+    public function __unset(string $offset): void
     {
     }
 
