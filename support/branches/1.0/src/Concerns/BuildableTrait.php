@@ -29,12 +29,10 @@ trait BuildableTrait
      *
      * @param bool $built
      *
-     * @return static
+     * @return void
      */
-    public function setBuilt(bool $built = true): self
+    public function setBuilt(bool $built = true): void
     {
         $this->built = $built;
-
-        return $this;
     }
 }

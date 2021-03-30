@@ -20,7 +20,7 @@ interface SessionProxyInterface
      *
      * @param SessionManagerInterface $sessionManager
      *
-     * @return static
+     * @return void
      */
-    public function setSessionManager(SessionManagerInterface $sessionManager): self;
+    public function setSessionManager(SessionManagerInterface $sessionManager): void;
 }

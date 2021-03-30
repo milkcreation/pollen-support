@@ -53,7 +53,9 @@ trait ConfigBagAwareTrait
         }
 
         if (is_array($key)) {
-            return $this->configBag->set($key);
+            $this->configBag->set($key);
+
+            return $this->configBag;
         }
 
         throw new InvalidArgumentException('Invalid ConfigBag passed method arguments');
@@ -64,21 +66,17 @@ trait ConfigBagAwareTrait
      *
      * @return void
      */
-    public function parseConfig(): void
-    {
-    }
+    public function parseConfig(): void {}
 
     /**
      * Définition de la liste des paramètres de configuration.
      *
      * @param array $params
      *
-     * @return static
+     * @return void
      */
-    public function setConfig(array $params): self
+    public function setConfig(array $params): void
     {
         $this->config($params);
-
-        return $this;
     }
 }

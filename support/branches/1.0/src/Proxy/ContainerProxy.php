@@ -56,12 +56,10 @@ trait ContainerProxy
      *
      * @param Container $container
      *
-     * @return static
+     * @return void
      */
-    public function setContainer(Container $container): self
+    public function setContainer(Container $container): void
     {
         $this->container = $container;
-
-        return $this;
     }
 }

@@ -298,7 +298,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function addRecord(int $level, string $message = '', ?array $context = null, ?string $code = null): string
+    public function addRecord(int $level, string $message = '', ?array $context = null, ?string $code = null): array
     {
         $code = $code ?: Str::random();
 
@@ -313,9 +313,10 @@ class MessagesBag implements MessagesBagInterface
 
         $level_name = self::getLevelName($level);
 
-        $this->collectedRecords()->add(compact('code', 'context', 'level', 'level_name', 'message'));
+        $record = compact('code', 'context', 'level', 'level_name', 'message');
+        $this->collectedRecords()->add($record);
 
-        return $code;
+        return $record;
     }
 
     /**
@@ -574,7 +575,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function alert(string $message = '', ?array $context = null, ?string $code = null): string
+    public function alert(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::ALERT, $message, $context, $code);
     }
@@ -582,7 +583,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function critical(string $message = '', ?array $context = null, ?string $code = null): string
+    public function critical(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::CRITICAL, $message, $context, $code);
     }
@@ -590,7 +591,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function debug(string $message = '', ?array $context = null, ?string $code = null): string
+    public function debug(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::DEBUG, $message, $context, $code);
     }
@@ -598,7 +599,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function emergency(string $message = '', ?array $context = null, ?string $code = null): string
+    public function emergency(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::EMERGENCY, $message, $context, $code);
     }
@@ -606,7 +607,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function error(string $message = '', ?array $context = null, ?string $code = null): string
+    public function error(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::ERROR, $message, $context, $code);
     }
@@ -614,7 +615,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function info(string $message = '', ?array $context = null, ?string $code = null): string
+    public function info(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::INFO, $message, $context, $code);
     }
@@ -622,7 +623,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function log($level, string $message = '', ?array $context = null, ?string $code = null): string
+    public function log($level, string $message = '', ?array $context = null, ?string $code = null): array
     {
         $level = static::toMessageBagLevel($level);
 
@@ -632,7 +633,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function notice(string $message = '', ?array $context = null, ?string $code = null): string
+    public function notice(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::NOTICE, $message, $context, $code);
     }
@@ -640,7 +641,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function success(string $message = '', ?array $context = null, ?string $code = null): string
+    public function success(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(self::SUCCESS, $message, $context, $code);
     }
@@ -648,7 +649,7 @@ class MessagesBag implements MessagesBagInterface
     /**
      * @inheritDoc
      */
-    public function warning(string $message = '', ?array $context = null, ?string $code = null): string
+    public function warning(string $message = '', ?array $context = null, ?string $code = null): array
     {
         return $this->addRecord(static::WARNING, $message, $context, $code);
     }

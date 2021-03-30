@@ -52,12 +52,10 @@ trait FormProxy
      *
      * @param FormManagerInterface $formManager
      *
-     * @return static
+     * @return void
      */
-    public function setFormManager(FormManagerInterface $formManager): self
+    public function setFormManager(FormManagerInterface $formManager): void
     {
         $this->formManager = $formManager;
-
-        return $this;
     }
 }

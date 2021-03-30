@@ -54,12 +54,10 @@ trait FieldProxy
      *
      * @param FieldManagerInterface $fieldManager
      *
-     * @return static
+     * @return void
      */
-    public function setFieldManager(FieldManagerInterface $fieldManager): self
+    public function setFieldManager(FieldManagerInterface $fieldManager): void
     {
         $this->fieldManager = $fieldManager;
-
-        return $this;
     }
 }

@@ -49,12 +49,10 @@ trait RouterProxy
      *
      * @param RouterInterface $router
      *
-     * @return static
+     * @return void
      */
-    public function setRouter(RouterInterface $router): self
+    public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
-
-        return $this;
     }
 }

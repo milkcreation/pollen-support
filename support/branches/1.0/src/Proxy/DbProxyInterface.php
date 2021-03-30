@@ -23,7 +23,7 @@ interface DbProxyInterface
      *
      * @param DatabaseManagerInterface $dbManager
      *
-     * @return static
+     * @return void
      */
-    public function setDbManager(DatabaseManagerInterface $dbManager): self;
+    public function setDbManager(DatabaseManagerInterface $dbManager): void;
 }

@@ -20,7 +20,7 @@ interface RouterProxyInterface
      *
      * @param RouterInterface $router
      *
-     * @return static
+     * @return void
      */
-    public function setRouter(RouterInterface $router): self;
+    public function setRouter(RouterInterface $router): void;
 }

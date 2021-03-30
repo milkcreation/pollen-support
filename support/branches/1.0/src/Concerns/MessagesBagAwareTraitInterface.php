@@ -15,7 +15,7 @@ interface MessagesBagAwareTraitInterface
      * @param string|int $level
      * @param mixed $datas
      *
-     * @return string|MessagesBag
+     * @return array|MessagesBag
      */
     public function messages(?string $message = null, $level = MessagesBag::ERROR, array $datas = []);
 
@@ -24,7 +24,7 @@ interface MessagesBagAwareTraitInterface
      *
      * @param MessagesBag $messagesBag
      *
-     * @return static
+     * @return void
      */
-    public function setMessagesBag(MessagesBag $messagesBag): self;
+    public function setMessagesBag(MessagesBag $messagesBag): void;
 }
