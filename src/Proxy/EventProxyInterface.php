@@ -20,7 +20,7 @@ interface EventProxyInterface
      *
      * @param EventDispatcherInterface $eventDispatcher
      *
-     * @return static
+     * @return void
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): self;
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void;
 }

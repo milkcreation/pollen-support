@@ -23,7 +23,7 @@ interface FormProxyInterface
      *
      * @param FormManagerInterface $formManager
      *
-     * @return static
+     * @return void
      */
-    public function setFormManager(FormManagerInterface $formManager): self;
+    public function setFormManager(FormManagerInterface $formManager): void;
 }

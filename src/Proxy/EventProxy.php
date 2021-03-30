@@ -49,12 +49,10 @@ trait EventProxy
      *
      * @param EventDispatcherInterface $eventDispatcher
      *
-     * @return static
+     * @return void
      */
-    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): self
+    public function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
-
-        return $this;
     }
 }

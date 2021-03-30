@@ -40,6 +40,12 @@ use Throwable;
 class Filesystem
 {
     /**
+     * Séparateur de répertoire
+     * @var string
+     */
+    public const DS = DIRECTORY_SEPARATOR;
+
+    /**
      * Instance du gestionnaire de système de fichier de Composer.
      * @var ComposerFs|object|null
      */

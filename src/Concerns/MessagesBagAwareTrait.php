@@ -24,7 +24,7 @@ trait MessagesBagAwareTrait
      * @param string|int $level
      * @param mixed $datas
      *
-     * @return string|MessagesBag
+     * @return array|MessagesBag
      */
     public function messages(?string $message = null, $level = MessagesBag::ERROR, array $datas = [])
     {
@@ -46,12 +46,10 @@ trait MessagesBagAwareTrait
      *
      * @param MessagesBag $messagesBag
      *
-     * @return static
+     * @return void
      */
-    public function setMessagesBag(MessagesBag $messagesBag): self
+    public function setMessagesBag(MessagesBag $messagesBag): void
     {
         $this->messagesBag = $messagesBag;
-
-        return $this;
     }
 }

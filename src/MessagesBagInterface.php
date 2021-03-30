@@ -26,9 +26,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function addRecord(int $level, string $message = '', ?array $context = null, ?string $code = null): string;
+    public function addRecord(int $level, string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Récupération de la liste complète des messages|associés à un niveau.
@@ -202,9 +202,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function alert(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function alert(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message de condition critique.
@@ -213,9 +213,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function critical(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function critical(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message de deboguage.
@@ -224,9 +224,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function debug(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function debug(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message d'urgence.
@@ -235,9 +235,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function emergency(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function emergency(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message d'erreur.
@@ -246,9 +246,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function error(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function error(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message d'information.
@@ -257,9 +257,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function info(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function info(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message de niveau arbitraire.
@@ -269,9 +269,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function log($level, string $message = '', ?array $context = null, ?string $code = null): string;
+    public function log($level, string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message de notification.
@@ -280,9 +280,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function notice(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function notice(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message de succès.
@@ -291,9 +291,9 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string
+     * @return array
      */
-    public function success(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function success(string $message = '', ?array $context = null, ?string $code = null): array;
 
     /**
      * Ajout d'un message d'avertissement.
@@ -302,7 +302,7 @@ interface MessagesBagInterface extends ArrayAccess, Countable, IteratorAggregate
      * @param array|null $context
      * @param string|null $code
      *
-     * @return string.
+     * @return array
      */
-    public function warning(string $message = '', ?array $context = null, ?string $code = null): string;
+    public function warning(string $message = '', ?array $context = null, ?string $code = null): array;
 }

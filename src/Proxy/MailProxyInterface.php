@@ -23,7 +23,7 @@ interface MailProxyInterface
      *
      * @param MailManagerInterface $mailManager
      *
-     * @return static
+     * @return void
      */
-    public function setMailManager(MailManagerInterface $mailManager): self;
+    public function setMailManager(MailManagerInterface $mailManager): void;
 }

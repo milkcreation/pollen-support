@@ -29,7 +29,7 @@ interface HttpRequestProxyInterface
      *
      * @param RequestInterface $httpRequest
      *
-     * @return static
+     * @return void
      */
-    public function setHttpRequest(RequestInterface $httpRequest): self;
+    public function setHttpRequest(RequestInterface $httpRequest): void;
 }

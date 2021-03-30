@@ -30,12 +30,10 @@ trait BootableTrait
      *
      * @param bool $booted
      *
-     * @return static
+     * @return void
      */
-    public function setBooted(bool $booted = true): self
+    public function setBooted(bool $booted = true): void
     {
         $this->booted = $booted;
-
-        return $this;
     }
 }
