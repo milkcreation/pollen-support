@@ -12,7 +12,7 @@ use Psr\Container\ContainerInterface as Container;
 trait ContainerProxy
 {
     /**
-     * Instance du conteneur d'injection de dépendance.
+     * Instance du conteneur d'injection de dépendances.
      * @var Container|null
      */
     private $container;

@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Log\LogManager;
 use Pollen\Log\LogManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -32,16 +32,14 @@ trait LogProxy
     public function log($level = null, string $message = '', array $context = [])
     {
         if ($this->logManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(LogManagerInterface::class)) {
-                $this->logManager = $container->get(LogManagerInterface::class);
-            } else {
-                try {
-                    $this->logManager = LogManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->logManager = new LogManager();
-                }
+            try {
+                $this->logManager = LogManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->logManager = StaticProxy::getProxyInstance(
+                    LogManagerInterface::class,
+                    LogManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 

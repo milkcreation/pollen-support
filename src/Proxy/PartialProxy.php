@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use InvalidArgumentException;
 use Pollen\Partial\PartialDriverInterface;
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -33,20 +34,26 @@ trait PartialProxy
     public function partial(?string $alias = null, $idOrParams = null, array $params = [])
     {
         if ($this->partialManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(PartialManagerInterface::class)) {
-                $this->partialManager = $container->get(PartialManagerInterface::class);
-            } else {
-                try {
-                    $this->partialManager = PartialManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->partialManager = new PartialManager();
-                }
+            try {
+                $this->partialManager = PartialManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->partialManager = StaticProxy::getProxyInstance(
+                    PartialManagerInterface::class,
+                    PartialManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
-        return $alias === null ? $this->partialManager: $this->partialManager->get($alias, $idOrParams, $params);
+        if ($alias === null) {
+            return $this->partialManager;
+        }
+
+        if ($partial = $this->partialManager->get($alias, $idOrParams, $params)) {
+            return $partial;
+        }
+
+        throw new InvalidArgumentException(sprintf('Partial [%s] is unavailable', $alias));
     }
 
     /**

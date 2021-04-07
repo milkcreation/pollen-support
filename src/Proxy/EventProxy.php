@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Event\EventDispatcher;
 use Pollen\Event\EventDispatcherInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -28,16 +28,14 @@ trait EventProxy
     public function event(): EventDispatcherInterface
     {
         if ($this->eventDispatcher === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(EventDispatcherInterface::class)) {
-                $this->eventDispatcher = $container->get(EventDispatcherInterface::class);
-            } else {
-                try {
-                    $this->eventDispatcher = EventDispatcher::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->eventDispatcher = new EventDispatcher();
-                }
+            try {
+                $this->eventDispatcher = EventDispatcher::getInstance();
+            } catch (RuntimeException $e) {
+                $this->eventDispatcher = StaticProxy::getProxyInstance(
+                    EventDispatcherInterface::class,
+                    EventDispatcher::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 

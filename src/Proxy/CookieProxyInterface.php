@@ -13,11 +13,10 @@ interface CookieProxyInterface
      * Instance du gestionnaire de cookies|Instance d'un cookie.
      *
      * @param string|null $alias
-     * @param array $args
      *
      * @return CookieJarInterface|CookieInterface
      */
-    public function cookie(?string $alias = null, array $args = []): CookieJarInterface;
+    public function cookie(?string $alias = null): CookieJarInterface;
 
     /**
      * Définition du gestionnaire de cookies.

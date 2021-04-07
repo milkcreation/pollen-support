@@ -6,9 +6,10 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Http\Request;
 use Pollen\Http\RequestInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use Psr\Http\Message\ServerRequestInterface as PsrRequestInterface;
 use Symfony\Component\HttpFoundation\Request as BaseRequest;
+use RuntimeException;
 
 /**
  * @see \Pollen\Support\Proxy\HttpRequestProxyInterface
@@ -29,11 +30,13 @@ trait HttpRequestProxy
     public function httpRequest(): RequestInterface
     {
         if ($this->httpRequest === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(RequestInterface::class)) {
-                $this->httpRequest = $container->get(RequestInterface::class);
-            } else {
+            try {
+                $this->httpRequest = StaticProxy::getProxyInstance(
+                    RequestInterface::class,
+                    null,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
+            } catch (RuntimeException $e) {
                 $this->httpRequest = Request::createFromGlobals();
             }
         }

@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Session\SessionManager;
 use Pollen\Session\SessionManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -28,16 +28,14 @@ trait SessionProxy
     public function session(): SessionManagerInterface
     {
         if ($this->sessionManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(SessionManagerInterface::class)) {
-                $this->sessionManager = $container->get(SessionManagerInterface::class);
-            } else {
-                try {
-                    $this->sessionManager = SessionManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->sessionManager = new SessionManager();
-                }
+            try {
+                $this->sessionManager = SessionManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->sessionManager = StaticProxy::getProxyInstance(
+                    SessionManagerInterface::class,
+                    SessionManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 

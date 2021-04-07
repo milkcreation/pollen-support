@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use InvalidArgumentException;
 use Pollen\Asset\AssetInterface;
 use Pollen\Asset\AssetManager;
 use Pollen\Asset\AssetManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -16,31 +17,29 @@ use RuntimeException;
 trait AssetProxy
 {
     /**
-     * Instance du gestionnaire de politique de confidentialité.
+     * Instance du gestionnaire des assets.
      * @var AssetManagerInterface|null
      */
     private $assetManager;
 
     /**
-     * Instance du gestionnaire de politique de confidentialité.
+     * Instance du gestionnaire des assets.
      *
      * @param string|null $name
      *
-     * @return AssetManagerInterface|AssetInterface|null
+     * @return AssetManagerInterface|AssetInterface
      */
     public function asset(?string $name = null)
     {
         if ($this->assetManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(AssetManagerInterface::class)) {
-                $this->assetManager = $container->get(AssetManagerInterface::class);
-            } else {
-                try {
-                    $this->assetManager = AssetManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->assetManager = new AssetManager();
-                }
+            try {
+                $this->assetManager = AssetManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->assetManager = StaticProxy::getProxyInstance(
+                    AssetManagerInterface::class,
+                    AssetManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
@@ -48,20 +47,22 @@ trait AssetProxy
             return $this->assetManager;
         }
 
-        return $this->assetManager->get($name);
+        if ($asset = $this->assetManager->get($name)) {
+            return $asset;
+        }
+
+        throw new InvalidArgumentException(sprintf('Asset [%s] is unavailable', $asset));
     }
 
     /**
-     * Définition du gestionnaire de politique de confidentialité.
+     * Définition du gestionnaire des assets.
      *
      * @param AssetManagerInterface $assetManager
      *
-     * @return AssetProxy|AssetProxyInterface|static
+     * @return void
      */
-    public function setAssetManager(AssetManagerInterface $assetManager): self
+    public function setAssetManager(AssetManagerInterface $assetManager): void
     {
         $this->assetManager = $assetManager;
-
-        return $this;
     }
 }

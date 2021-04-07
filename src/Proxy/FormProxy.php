@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use InvalidArgumentException;
 use Pollen\Form\FormInterface;
 use Pollen\Form\FormManager;
 use Pollen\Form\FormManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -31,20 +32,26 @@ trait FormProxy
     public function form(?string $alias = null)
     {
         if ($this->formManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(FormManagerInterface::class)) {
-                $this->formManager = $container->get(FormManagerInterface::class);
-            } else {
-                try {
-                    $this->formManager = FormManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->formManager = new FormManager();
-                }
+            try {
+                $this->formManager = FormManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->formManager = StaticProxy::getProxyInstance(
+                    FormManagerInterface::class,
+                    FormManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
-        return $alias === null ? $this->formManager: $this->formManager->get($alias);
+        if ($alias === null) {
+            return $this->formManager;
+        }
+
+        if ($form = $this->formManager->get($alias)) {
+            return $form;
+        }
+
+        throw new InvalidArgumentException(sprintf('Form [%s] is unavailable', $alias));
     }
 
     /**

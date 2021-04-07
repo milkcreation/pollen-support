@@ -7,8 +7,9 @@ namespace Pollen\Support\Proxy;
 use Pollen\Cookie\CookieInterface;
 use Pollen\Cookie\CookieJar;
 use Pollen\Cookie\CookieJarInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
+use InvalidArgumentException;
 
 /**
  * @see \Pollen\Support\Proxy\CookieProxyInterface
@@ -25,27 +26,32 @@ trait CookieProxy
      * Instance du gestionnaire de cookies|Instance d'un cookie.
      *
      * @param string|null $alias
-     * @param array $args
      *
      * @return CookieJarInterface|CookieInterface
      */
-    public function cookie(?string $alias = null, array $args = [])
+    public function cookie(?string $alias = null)
     {
         if ($this->cookieJar === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(CookieJarInterface::class)) {
-                $this->cookieJar = $container->get(CookieJarInterface::class);
-            } else {
-                try {
-                    $this->cookieJar = CookieJar::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->cookieJar = new CookieJar();
-                }
+            try {
+                $this->cookieJar = CookieJar::getInstance();
+            } catch (RuntimeException $e) {
+                $this->cookieJar = StaticProxy::getProxyInstance(
+                    CookieJarInterface::class,
+                    CookieJar::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
-        return $alias === null ? $this->cookieJar : $this->cookieJar->make($alias, $args);
+        if ($alias === null) {
+            return $this->cookieJar;
+        }
+
+        if ($cookie = $this->cookieJar->get($alias)) {
+            return $cookie;
+        }
+
+        throw new InvalidArgumentException(sprintf('Cookie [%s] is unavailable', $alias));
     }
 
     /**
