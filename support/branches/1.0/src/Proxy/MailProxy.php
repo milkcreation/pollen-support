@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
+use InvalidArgumentException;
 use Pollen\Mail\MailableInterface;
 use Pollen\Mail\MailManager;
 use Pollen\Mail\MailManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -31,16 +32,14 @@ trait MailProxy
     public function mail($mailable = null)
     {
         if ($this->mailManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(MailManagerInterface::class)) {
-                $this->mailManager = $container->get(MailManagerInterface::class);
-            } else {
-                try {
-                    $this->mailManager = MailManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->mailManager = new MailManager();
-                }
+            try {
+                $this->mailManager = MailManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->mailManager = StaticProxy::getProxyInstance(
+                    MailManagerInterface::class,
+                    MailManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 
@@ -48,7 +47,11 @@ trait MailProxy
             return $this->mailManager;
         }
 
-        return $this->mailManager->setMailable($mailable)->getMailable();
+        if ($mailable = $this->mailManager->setMailable($mailable)) {
+            return $mailable;
+        }
+
+        throw new InvalidArgumentException('Mailable is unavailable');
     }
 
     /**

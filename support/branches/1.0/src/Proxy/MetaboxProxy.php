@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Metabox\MetaboxManager;
 use Pollen\Metabox\MetaboxManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -28,16 +28,14 @@ trait MetaboxProxy
     public function metabox(): MetaboxManagerInterface
     {
         if ($this->metaboxManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(MetaboxManagerInterface::class)) {
-                $this->metaboxManager = $container->get(MetaboxManagerInterface::class);
-            } else {
-                try {
-                    $this->metaboxManager = MetaboxManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->metaboxManager = new MetaboxManager();
-                }
+            try {
+                $this->metaboxManager = MetaboxManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->metaboxManager = StaticProxy::getProxyInstance(
+                    MetaboxManagerInterface::class,
+                    MetaboxManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 

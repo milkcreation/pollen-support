@@ -7,7 +7,7 @@ namespace Pollen\Support\Proxy;
 use Illuminate\Database\Query\Builder;
 use Pollen\Database\DatabaseManager;
 use Pollen\Database\DatabaseManagerInterface;
-use Psr\Container\ContainerInterface as Container;
+use Pollen\Support\StaticProxy;
 use RuntimeException;
 
 /**
@@ -31,16 +31,14 @@ trait DbProxy
     public function db(?string $dbTable = null)
     {
         if ($this->dbManager === null) {
-            $container = method_exists($this, 'getContainer') ? $this->getContainer() : null;
-
-            if ($container instanceof Container && $container->has(DatabaseManagerInterface::class)) {
-                $this->dbManager = $container->get(DatabaseManagerInterface::class);
-            } else {
-                try {
-                    $this->dbManager = DatabaseManager::getInstance();
-                } catch(RuntimeException $e) {
-                    $this->dbManager = new DatabaseManager();
-                }
+            try {
+                $this->dbManager = DatabaseManager::getInstance();
+            } catch (RuntimeException $e) {
+                $this->dbManager = StaticProxy::getProxyInstance(
+                    DatabaseManagerInterface::class,
+                    DatabaseManager::class,
+                    method_exists($this, 'getContainer') ? $this->getContainer() : null
+                );
             }
         }
 

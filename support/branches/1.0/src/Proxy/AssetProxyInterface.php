@@ -14,7 +14,7 @@ Interface AssetProxyInterface
      *
      * @param string|null $name
      *
-     * @return AssetManagerInterface|AssetInterface|null
+     * @return AssetManagerInterface|AssetInterface
      */
     public function asset(?string $name = null);
 
@@ -23,7 +23,7 @@ Interface AssetProxyInterface
      *
      * @param AssetManagerInterface $assetManager
      *
-     * @return AssetProxy|AssetProxyInterface|static
+     * @return void
      */
-    public function setAssetManager(AssetManagerInterface $assetManager): self;
+    public function setAssetManager(AssetManagerInterface $assetManager): void;
 }
