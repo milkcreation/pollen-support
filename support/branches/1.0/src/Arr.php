@@ -10,19 +10,43 @@ use Pollen\Validation\Validator as v;
 class Arr extends BaseArr
 {
     /**
-     * Serialisation de données si nécessaire.
-     * @see https://codex.wordpress.org/Function_Reference/maybe_serialize
+     * Insertion d'un tableau après une clé d'indice
+     * @see https://gist.github.com/wpscholar/0deadce1bbfa4adb4e4c
      *
-     * @param string|array|object $data .
+     * @param array $array
+     * @param mixed $new
+     * @param string|int $key
+     *
+     * @return array
+     */
+    public static function insertAfter(array $array, $new, $key): array
+    {
+        $keys = array_keys($array);
+        $index = array_search($key, $keys, true);
+        $pos = false === $index ? count($array) : $index;
+
+        return array_merge(
+            array_slice($array, 0, $pos, true),
+            [$pos => $new],
+            array_slice($array, $pos, null, true)
+        );
+    }
+
+    /**
+     * Serialisation de données si nécessaire.
+     *
+     * @param string|array|object $data
      *
      * @return mixed
      */
     public static function serialize($data)
     {
         if (is_array($data) || is_object($data)) {
-            $data = serialize($data);
-        } elseif (v::serialized(false)->validate($data)) {
-            $data = serialize($data);
+            return serialize($data);
+        }
+
+        if (v::serialized(false)->validate($data)) {
+            return serialize($data);
         }
 
         return $data;
@@ -52,28 +76,5 @@ class Arr extends BaseArr
         }
 
         return $data;
-    }
-
-    /**
-     * Insertion d'un tableau après une clé d'indice
-     * @see https://gist.github.com/wpscholar/0deadce1bbfa4adb4e4c
-     *
-     * @param array $array
-     * @param mixed $new
-     * @param string|int $key
-     *
-     * @return array
-     */
-    public static function insertAfter(array $array, $new, $key): array
-    {
-        $keys = array_keys($array);
-        $index = array_search($key, $keys, true);
-        $pos = false === $index ? count($array) : $index;
-
-        return array_merge(
-            array_slice($array, 0, $pos, true),
-            [$pos => $new],
-            array_slice($array, $pos, null, true)
-        );
     }
 }
