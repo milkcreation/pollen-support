@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Pollen\Support;
 
+use Error;
 use Illuminate\Support\Str as BaseStr;
+use Pollen\Validation\Validator as v;
 
 class Str extends BaseStr
 {
@@ -144,17 +146,22 @@ class Str extends BaseStr
     /**
      * Déserialisation d'un chaine de caractère.
      *
-     * @param string $value Chaîne de caractère à convertir.
+     * @param string $value
      *
      * @return mixed
-     * /
-     * public static function unserialize(string $value)
-     * {
-     * if (v::serialized()->validate($value)) {
-     * return @unserialize($value);
-     * }
-     *
-     * return $value;
-     * }
-     * /**/
+     */
+    public static function unserialize(string $value)
+    {
+        if (v::serialized()->validate($value)) {
+            try {
+                $unserialized = @unserialize($value);
+            } catch(Error $e) {
+                return $value;
+            }
+
+            return ($unserialized !== false) ? $unserialized : $value;
+        }
+
+        return $value;
+    }
 }
