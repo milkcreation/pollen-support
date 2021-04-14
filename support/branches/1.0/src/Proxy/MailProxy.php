@@ -47,8 +47,8 @@ trait MailProxy
             return $this->mailManager;
         }
 
-        if ($mailable = $this->mailManager->setMailable($mailable)) {
-            return $mailable;
+        if ($this->mailManager->setMailable($mailable)) {
+            return $this->mailManager->getMailable();
         }
 
         throw new InvalidArgumentException('Mailable is unavailable');
