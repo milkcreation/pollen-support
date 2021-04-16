@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Pollen\Support;
 
 use Psr\Container\ContainerInterface as Container;
-use RuntimeException;
+use Pollen\Support\Exception\ProxyRuntimeException;
 
 class StaticProxy
 {
@@ -49,6 +49,6 @@ class StaticProxy
             return new $fallbackClassname();
         }
 
-        throw new RuntimeException(sprintf('Static Proxy could not retrieves [%s] instance.', $alias));
+        throw new ProxyRuntimeException(sprintf('Static Proxy could not retrieves [%s] instance.', $alias));
     }
 }

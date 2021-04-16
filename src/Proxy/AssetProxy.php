@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
-use InvalidArgumentException;
 use Pollen\Asset\AssetInterface;
 use Pollen\Asset\AssetManager;
 use Pollen\Asset\AssetManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
 
@@ -51,7 +51,7 @@ trait AssetProxy
             return $asset;
         }
 
-        throw new InvalidArgumentException(sprintf('Asset [%s] is unavailable', $asset));
+        throw new ProxyInvalidArgumentException(sprintf('Asset [%s] is unavailable', $asset));
     }
 
     /**
