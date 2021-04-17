@@ -35,8 +35,11 @@ class StaticProxy
      *
      * @return object
      */
-    public static function getProxyInstance(string $alias, ?string $fallbackClassname, ?Container $container = null): object
-    {
+    public static function getProxyInstance(
+        string $alias,
+        ?string $fallbackClassname = null,
+        ?Container $container = null
+    ): object {
         if ($container === null) {
             $container = static::$proxyContainer;
         }

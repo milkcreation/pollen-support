@@ -16,7 +16,7 @@ interface CookieProxyInterface
      *
      * @return CookieJarInterface|CookieInterface
      */
-    public function cookie(?string $alias = null): CookieJarInterface;
+    public function cookie(?string $alias = null);
 
     /**
      * Définition du gestionnaire de cookies.

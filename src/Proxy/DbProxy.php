@@ -7,8 +7,10 @@ namespace Pollen\Support\Proxy;
 use Illuminate\Database\Query\Builder;
 use Pollen\Database\DatabaseManager;
 use Pollen\Database\DatabaseManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
+use Exception;
 
 /**
  * @see \Pollen\Support\Proxy\DbProxyInterface
@@ -46,7 +48,11 @@ trait DbProxy
             return $this->dbManager;
         }
 
-        return $this->dbManager->getConnection()->table($dbTable);
+        try {
+            return $this->dbManager->getConnection()->table($dbTable);
+        } catch(Exception $e) {
+            throw new ProxyInvalidArgumentException(sprintf('Db Table [%s] is unavailable', $dbTable));
+        }
     }
 
     /**

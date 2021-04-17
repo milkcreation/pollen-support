@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Pollen\Mail\MailableInterface;
 use Pollen\Mail\MailManager;
 use Pollen\Mail\MailManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
 
@@ -51,7 +52,7 @@ trait MailProxy
             return $this->mailManager->getMailable();
         }
 
-        throw new InvalidArgumentException('Mailable is unavailable');
+        throw new ProxyInvalidArgumentException('Mailable is unavailable');
     }
 
     /**
