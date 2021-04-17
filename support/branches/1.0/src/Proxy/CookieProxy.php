@@ -7,9 +7,9 @@ namespace Pollen\Support\Proxy;
 use Pollen\Cookie\CookieInterface;
 use Pollen\Cookie\CookieJar;
 use Pollen\Cookie\CookieJarInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
-use InvalidArgumentException;
 
 /**
  * @see \Pollen\Support\Proxy\CookieProxyInterface
@@ -51,7 +51,7 @@ trait CookieProxy
             return $cookie;
         }
 
-        throw new InvalidArgumentException(sprintf('Cookie [%s] is unavailable', $alias));
+        throw new ProxyInvalidArgumentException(sprintf('Cookie [%s] is unavailable', $alias));
     }
 
     /**

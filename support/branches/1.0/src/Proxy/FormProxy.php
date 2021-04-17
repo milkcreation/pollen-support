@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
-use InvalidArgumentException;
 use Pollen\Form\FormInterface;
 use Pollen\Form\FormManager;
 use Pollen\Form\FormManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
 
@@ -51,7 +51,7 @@ trait FormProxy
             return $form;
         }
 
-        throw new InvalidArgumentException(sprintf('Form [%s] is unavailable', $alias));
+        throw new ProxyInvalidArgumentException(sprintf('Form [%s] is unavailable', $alias));
     }
 
     /**

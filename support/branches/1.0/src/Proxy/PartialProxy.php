@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use Pollen\Partial\PartialDriverInterface;
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
 
@@ -53,7 +54,7 @@ trait PartialProxy
             return $partial;
         }
 
-        throw new InvalidArgumentException(sprintf('Partial [%s] is unavailable', $alias));
+        throw new ProxyInvalidArgumentException(sprintf('Partial [%s] is unavailable', $alias));
     }
 
     /**

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
-use InvalidArgumentException;
 use Pollen\Field\FieldDriverInterface;
 use Pollen\Field\FieldManager;
 use Pollen\Field\FieldManagerInterface;
+use Pollen\Support\Exception\ProxyInvalidArgumentException;
 use Pollen\Support\StaticProxy;
 use RuntimeException;
 
@@ -53,7 +53,7 @@ trait FieldProxy
             return $field;
         }
 
-        throw new InvalidArgumentException(sprintf('Field [%s] is unavailable', $alias));
+        throw new ProxyInvalidArgumentException(sprintf('Field [%s] is unavailable', $alias));
     }
 
     /**
