@@ -43,7 +43,7 @@ trait LogProxy
             }
         }
 
-        if ($level !== null) {
+        if ($level === null) {
             return $this->logManager;
         }
 
