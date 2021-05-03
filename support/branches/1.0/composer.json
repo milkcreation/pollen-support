@@ -8,7 +8,7 @@
     "support",
     "PHP developpement"
   ],
-  "time": "2021-04-26",
+  "time": "2021-05-03",
   "license": "MIT",
   "authors": [
     {
@@ -27,6 +27,7 @@
     "php": ">=7.4",
     "composer/composer": "^2.0",
     "composer/installers": "~1.0",
+    "ramsey/uuid": "^4.0",
     "illuminate/support": "^8.22",
     "pollen-solutions/validation": "^1.0"
   },
