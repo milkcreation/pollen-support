@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Metabox\MetaboxManager;
 use Pollen\Metabox\MetaboxManagerInterface;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -31,7 +31,7 @@ trait MetaboxProxy
             try {
                 $this->metaboxManager = MetaboxManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->metaboxManager = StaticProxy::getProxyInstance(
+                $this->metaboxManager = ProxyResolver::getInstance(
                     MetaboxManagerInterface::class,
                     MetaboxManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

@@ -8,7 +8,7 @@ use Pollen\Filesystem\FilesystemInterface;
 use Pollen\Filesystem\StorageManager;
 use Pollen\Filesystem\StorageManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -35,7 +35,7 @@ trait StorageProxy
             try {
                 $this->storageManager = StorageManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->storageManager = StaticProxy::getProxyInstance(
+                $this->storageManager = ProxyResolver::getInstance(
                     StorageManagerInterface::class,
                     StorageManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

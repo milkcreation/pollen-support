@@ -7,7 +7,7 @@ namespace Pollen\Support;
 use Psr\Container\ContainerInterface as Container;
 use Pollen\Support\Exception\ProxyRuntimeException;
 
-class StaticProxy
+class ProxyResolver
 {
     /**
      * @var Container
@@ -21,7 +21,7 @@ class StaticProxy
      *
      * @return void
      */
-    public static function setProxyContainer(Container $container): void
+    public static function setContainer(Container $container): void
     {
         static::$proxyContainer = $container;
     }
@@ -35,7 +35,7 @@ class StaticProxy
      *
      * @return object
      */
-    public static function getProxyInstance(
+    public static function getInstance(
         string $alias,
         ?string $fallbackClassname = null,
         ?Container $container = null

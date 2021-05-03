@@ -8,7 +8,7 @@ use Pollen\Cookie\CookieInterface;
 use Pollen\Cookie\CookieJar;
 use Pollen\Cookie\CookieJarInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -35,7 +35,7 @@ trait CookieProxy
             try {
                 $this->cookieJar = CookieJar::getInstance();
             } catch (RuntimeException $e) {
-                $this->cookieJar = StaticProxy::getProxyInstance(
+                $this->cookieJar = ProxyResolver::getInstance(
                     CookieJarInterface::class,
                     CookieJar::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null
