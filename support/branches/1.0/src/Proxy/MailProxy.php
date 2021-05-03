@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
-use InvalidArgumentException;
 use Pollen\Mail\MailableInterface;
 use Pollen\Mail\MailManager;
 use Pollen\Mail\MailManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -36,7 +35,7 @@ trait MailProxy
             try {
                 $this->mailManager = MailManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->mailManager = StaticProxy::getProxyInstance(
+                $this->mailManager = ProxyResolver::getInstance(
                     MailManagerInterface::class,
                     MailManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

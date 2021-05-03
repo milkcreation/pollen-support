@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Log\LogManager;
 use Pollen\Log\LogManagerInterface;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -35,7 +35,7 @@ trait LogProxy
             try {
                 $this->logManager = LogManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->logManager = StaticProxy::getProxyInstance(
+                $this->logManager = ProxyResolver::getInstance(
                     LogManagerInterface::class,
                     LogManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Exception;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use Pollen\Validation\Validator;
 use Pollen\Validation\ValidatorInterface;
 use RuntimeException;
@@ -36,7 +36,7 @@ trait ValidatorProxy
             try {
                 $this->validator = Validator::createOrExisting();
             } catch (RuntimeException $e) {
-                $this->validator = StaticProxy::getProxyInstance(
+                $this->validator = ProxyResolver::getInstance(
                     ValidatorInterface::class,
                     Validator::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

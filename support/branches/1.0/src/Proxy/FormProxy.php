@@ -8,7 +8,7 @@ use Pollen\Form\FormInterface;
 use Pollen\Form\FormManager;
 use Pollen\Form\FormManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -35,7 +35,7 @@ trait FormProxy
             try {
                 $this->formManager = FormManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->formManager = StaticProxy::getProxyInstance(
+                $this->formManager = ProxyResolver::getInstance(
                     FormManagerInterface::class,
                     FormManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

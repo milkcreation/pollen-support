@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Session\SessionManager;
 use Pollen\Session\SessionManagerInterface;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -31,7 +31,7 @@ trait SessionProxy
             try {
                 $this->sessionManager = SessionManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->sessionManager = StaticProxy::getProxyInstance(
+                $this->sessionManager = ProxyResolver::getInstance(
                     SessionManagerInterface::class,
                     SessionManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Event\EventDispatcher;
 use Pollen\Event\EventDispatcherInterface;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -31,7 +31,7 @@ trait EventProxy
             try {
                 $this->eventDispatcher = EventDispatcher::getInstance();
             } catch (RuntimeException $e) {
-                $this->eventDispatcher = StaticProxy::getProxyInstance(
+                $this->eventDispatcher = ProxyResolver::getInstance(
                     EventDispatcherInterface::class,
                     EventDispatcher::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

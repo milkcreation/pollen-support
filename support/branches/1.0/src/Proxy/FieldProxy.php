@@ -8,7 +8,7 @@ use Pollen\Field\FieldDriverInterface;
 use Pollen\Field\FieldManager;
 use Pollen\Field\FieldManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -37,7 +37,7 @@ trait FieldProxy
             try {
                 $this->fieldManager = FieldManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->fieldManager = StaticProxy::getProxyInstance(
+                $this->fieldManager = ProxyResolver::getInstance(
                     FieldManagerInterface::class,
                     FieldManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

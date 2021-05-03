@@ -8,7 +8,7 @@ use Pollen\Asset\AssetInterface;
 use Pollen\Asset\AssetManager;
 use Pollen\Asset\AssetManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -35,7 +35,7 @@ trait AssetProxy
             try {
                 $this->assetManager = AssetManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->assetManager = StaticProxy::getProxyInstance(
+                $this->assetManager = ProxyResolver::getInstance(
                     AssetManagerInterface::class,
                     AssetManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

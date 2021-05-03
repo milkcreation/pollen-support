@@ -6,7 +6,7 @@ namespace Pollen\Support\Proxy;
 
 use Pollen\Routing\Router;
 use Pollen\Routing\RouterInterface;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -31,7 +31,7 @@ trait RouterProxy
             try {
                 $this->router = Router::getInstance();
             } catch (RuntimeException $e) {
-                $this->router = StaticProxy::getProxyInstance(
+                $this->router = ProxyResolver::getInstance(
                     RouterInterface::class,
                     Router::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

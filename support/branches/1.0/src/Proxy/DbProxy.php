@@ -8,7 +8,7 @@ use Illuminate\Database\Query\Builder;
 use Pollen\Database\DatabaseManager;
 use Pollen\Database\DatabaseManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 use Exception;
 
@@ -36,7 +36,7 @@ trait DbProxy
             try {
                 $this->dbManager = DatabaseManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->dbManager = StaticProxy::getProxyInstance(
+                $this->dbManager = ProxyResolver::getInstance(
                     DatabaseManagerInterface::class,
                     DatabaseManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null

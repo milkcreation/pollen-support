@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Pollen\Support\Proxy;
 
-use InvalidArgumentException;
 use Pollen\Partial\PartialDriverInterface;
 use Pollen\Partial\PartialManager;
 use Pollen\Partial\PartialManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
-use Pollen\Support\StaticProxy;
+use Pollen\Support\ProxyResolver;
 use RuntimeException;
 
 /**
@@ -38,7 +37,7 @@ trait PartialProxy
             try {
                 $this->partialManager = PartialManager::getInstance();
             } catch (RuntimeException $e) {
-                $this->partialManager = StaticProxy::getProxyInstance(
+                $this->partialManager = ProxyResolver::getInstance(
                     PartialManagerInterface::class,
                     PartialManager::class,
                     method_exists($this, 'getContainer') ? $this->getContainer() : null
