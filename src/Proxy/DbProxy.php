@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pollen\Support\Proxy;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Schema\Builder as SchemaBuilder;
 use Pollen\Database\DatabaseManager;
 use Pollen\Database\DatabaseManagerInterface;
 use Pollen\Support\Exception\ProxyInvalidArgumentException;
@@ -53,6 +54,18 @@ trait DbProxy
         } catch(Exception $e) {
             throw new ProxyInvalidArgumentException(sprintf('Db Table [%s] is unavailable', $dbTable));
         }
+    }
+
+    /**
+     * Instance du constructeur de base de données.
+     *
+     * @param string $name
+     *
+     * @return SchemaBuilder
+     */
+    public function schema(string $name = 'default'): SchemaBuilder
+    {
+        return $this->db()->getConnection($name)->getSchemaBuilder();
     }
 
     /**
