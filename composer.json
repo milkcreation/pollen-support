@@ -30,10 +30,10 @@
     "ramsey/uuid": "^4.0",
     "illuminate/support": "^8.22",
     "pollen-solutions/validation": "^1.0",
-    "ralouphie/mimey": "^2.1",
     "symfony/filesystem": "^5.2"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-latest",
     "phpunit/phpunit": "^9.0"
   },
   "autoload": {
