@@ -33,7 +33,7 @@ class ProxyResolver
      * @param string|null $fallbackClassname
      * @param Container|null $container
      *
-     * @return object
+     * @return object|mixed
      */
     public static function getInstance(
         string $alias,

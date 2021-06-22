@@ -17,9 +17,8 @@ trait AppProxy
 {
     /**
      * Instance de l'application.
-     * @var ApplicationInterface|null
      */
-    private $app;
+    private ?ApplicationInterface $app;
 
     /**
      * Instance de l'application.
