@@ -4,10 +4,27 @@ declare(strict_types=1);
 
 namespace Pollen\Support;
 
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 use Illuminate\Support\Env as BaseEnv;
 
 class Env extends BaseEnv
 {
+    /**
+     * @param string $dir
+     *
+     * @return void
+     */
+    public static function load(string $dir): void
+    {
+        try {
+            $dotenv = Dotenv::createImmutable($dir);
+            $dotenv->load();
+        } catch (InvalidPathException $e) {
+            unset($e);
+        }
+    }
+
     /**
      * Vérifie si l'environnement d'éxecution est en développement.
      *

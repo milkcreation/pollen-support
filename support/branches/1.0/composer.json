@@ -30,7 +30,8 @@
     "ramsey/uuid": "^4.0",
     "illuminate/support": "^8.22",
     "pollen-solutions/validation": "^1.0",
-    "symfony/filesystem": "^5.2"
+    "symfony/filesystem": "^5.2",
+    "vlucas/phpdotenv": "^5.3"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
