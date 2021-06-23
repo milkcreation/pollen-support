@@ -20,9 +20,8 @@ trait DbProxy
 {
     /**
      * Instance du gestionnaire de base de données.
-     * @var DatabaseManagerInterface
      */
-    private $dbManager;
+    private ?DatabaseManagerInterface $dbManager = null;
 
     /**
      * Instance du gestionnaire de base de données|Gestionnaire de requête d'une table de la base de données.

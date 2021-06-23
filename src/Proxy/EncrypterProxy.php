@@ -16,9 +16,8 @@ trait EncrypterProxy
 {
     /**
      * Instance du gestionnaire d'encryptage.
-     * @var EncrypterInterface
      */
-    private $encrypter;
+    private ?EncrypterInterface $encrypter = null;
 
     /**
      * Instance du gestionnaire d'encryptage.

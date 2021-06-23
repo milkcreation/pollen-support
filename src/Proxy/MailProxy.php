@@ -18,9 +18,8 @@ trait MailProxy
 {
     /**
      * Instance du gestionnaire de mail.
-     * @var MailManagerInterface
      */
-    private $mailManager;
+    private ?MailManagerInterface $mailManager = null;
 
     /**
      * Instance du gestionnaire de mail|Instance de mail.

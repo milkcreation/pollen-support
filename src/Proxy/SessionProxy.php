@@ -16,9 +16,8 @@ trait SessionProxy
 {
     /**
      * Instance du gestionnaire de sessions.
-     * @var SessionManagerInterface
      */
-    private $sessionManager;
+    private ?SessionManagerInterface $sessionManager = null;
 
     /**
      * Instance du gestionnaire de sessions.

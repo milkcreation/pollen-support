@@ -18,9 +18,8 @@ trait CookieProxy
 {
     /**
      * Instance du gestionnaire de cookies.
-     * @var CookieJar
      */
-    private $cookieJar;
+    private ?CookieJar $cookieJar = null;
 
     /**
      * Instance du gestionnaire de cookies|Instance d'un cookie.

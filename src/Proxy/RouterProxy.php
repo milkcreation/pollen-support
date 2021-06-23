@@ -16,9 +16,8 @@ trait RouterProxy
 {
     /**
      * Instance du gestionnaire de routage.
-     * @var RouterInterface
      */
-    private $router;
+    private ?RouterInterface $router = null;
 
     /**
      * Instance du gestionnaire de routage.

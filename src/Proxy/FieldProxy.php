@@ -18,20 +18,19 @@ trait FieldProxy
 {
     /**
      * Instance du gestionnaire de champs.
-     * @var FieldManagerInterface
      */
-    private $fieldManager;
+    private ?FieldManagerInterface $fieldManager = null;
 
     /**
      * Instance du gestionnaire de champs|Instance d'un champs.
      *
      * @param string|null $alias Alias de qualification.
      * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
-     * @param array $params Liste des attributs de configuration.
+     * @param array|null $params Liste des attributs de configuration.
      *
      * @return FieldManagerInterface|FieldDriverInterface
      */
-    public function field(?string $alias = null, $idOrParams = null, array $params = [])
+    public function field(?string $alias = null, $idOrParams = null, ?array $params = null)
     {
         if ($this->fieldManager === null) {
             try {

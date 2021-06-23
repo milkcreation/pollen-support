@@ -16,9 +16,8 @@ trait DebugProxy
 {
     /**
      * Instance du gestionnaire de débogage.
-     * @var DebugManagerInterface
      */
-    private $debugManager;
+    private ?DebugManagerInterface $debugManager = null;
 
     /**
      * Instance du gestionnaire de débogage.

@@ -18,9 +18,8 @@ trait StorageProxy
 {
     /**
      * Instance du gestionnaire de stockage.
-     * @var StorageManagerInterface
      */
-    private $storageManager;
+    private ?StorageManagerInterface $storageManager = null;
 
     /**
      * Instance du gestionnaire de stockage|système de gestion de fichiers.

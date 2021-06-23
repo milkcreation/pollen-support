@@ -18,20 +18,19 @@ trait PartialProxy
 {
     /**
      * Instance du gestionnaire de portions d'affichage.
-     * @var PartialManagerInterface
      */
-    private $partialManager;
+    private ?PartialManagerInterface $partialManager = null;
 
     /**
      * Instance du gestionnaire de portions d'affichage|Instance d'une portion d'affichage.
      *
      * @param string|null $alias Alias de qualification.
      * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
-     * @param array $params Liste des attributs de configuration.
+     * @param array|null $params Liste des attributs de configuration.
      *
      * @return PartialManagerInterface|PartialDriverInterface
      */
-    public function partial(?string $alias = null, $idOrParams = null, array $params = [])
+    public function partial(?string $alias = null, $idOrParams = null, ?array $params = null)
     {
         if ($this->partialManager === null) {
             try {

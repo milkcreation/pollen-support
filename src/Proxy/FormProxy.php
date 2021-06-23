@@ -18,9 +18,8 @@ trait FormProxy
 {
     /**
      * Instance du gestionnaire de formulaires.
-     * @var FormManagerInterface
      */
-    private $formManager;
+    private ?FormManagerInterface $formManager = null;
 
     /**
      * Instance du gestionnaire de formulaires|Instance d'un formulaire.
