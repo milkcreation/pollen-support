@@ -16,12 +16,12 @@ use RuntimeException;
 trait AppProxy
 {
     /**
-     * Instance de l'application.
+     * Instance.
      */
     private ?ApplicationInterface $app;
 
     /**
-     * Instance de l'application.
+     * Resolve App Instance or service served by container.
      *
      * @param string|null $serviceName
      *
@@ -53,7 +53,7 @@ trait AppProxy
     }
 
     /**
-     * Définition de l'application.
+     * Set App instance.
      *
      * @param ApplicationInterface $app
      *

@@ -14,11 +14,11 @@ interface PartialProxyInterface
      *
      * @param string|null $alias Alias de qualification.
      * @param mixed $idOrParams Identifiant de qualification|Liste des attributs de configuration.
-     * @param array $params Liste des attributs de configuration.
+     * @param array|null $params Liste des attributs de configuration.
      *
      * @return PartialManagerInterface|PartialDriverInterface
      */
-    public function partial(?string $alias = null, $idOrParams = null, array $params = []);
+    public function partial(?string $alias = null, $idOrParams = null, ?array $params = null);
 
     /**
      * Définition du gestionnaire de portions d'affichage.

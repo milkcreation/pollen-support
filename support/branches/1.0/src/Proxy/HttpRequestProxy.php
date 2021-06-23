@@ -18,9 +18,8 @@ trait HttpRequestProxy
 {
     /**
      * Instance de la requête HTTP.
-     * @var RequestInterface
      */
-    private $httpRequest;
+    private ?RequestInterface $httpRequest = null;
 
     /**
      * Instance de la requête HTTP.

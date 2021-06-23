@@ -16,9 +16,8 @@ trait MetaboxProxy
 {
     /**
      * Instance du gestionnaire de metaboxes.
-     * @var MetaboxManagerInterface|null
      */
-    private $metaboxManager;
+    private ?MetaboxManagerInterface $metaboxManager = null;
 
     /**
      * Instance du gestionnaire de metaboxes.

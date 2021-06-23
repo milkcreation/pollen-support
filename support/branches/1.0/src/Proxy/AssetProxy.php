@@ -18,9 +18,8 @@ trait AssetProxy
 {
     /**
      * Instance du gestionnaire des assets.
-     * @var AssetManagerInterface|null
      */
-    private $assetManager;
+    private ?AssetManagerInterface $assetManager = null;
 
     /**
      * Instance du gestionnaire des assets.

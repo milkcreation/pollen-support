@@ -16,9 +16,8 @@ trait EventProxy
 {
     /**
      * Instance du répartiteur d'événements.
-     * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    private ?EventDispatcherInterface $eventDispatcher = null;
 
     /**
      * Instance du répartiteur d'événements.

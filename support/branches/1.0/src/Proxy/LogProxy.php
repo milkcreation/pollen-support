@@ -16,9 +16,8 @@ trait LogProxy
 {
     /**
      * Instance du gestionnaire de log.
-     * @var LogManagerInterface
      */
-    private $logManager;
+    private ?LogManagerInterface $logManager = null;
 
     /**
      * Instance du gestionnaire de log|Enregistrement d'un message de log.

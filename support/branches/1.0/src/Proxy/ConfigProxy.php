@@ -17,9 +17,8 @@ trait ConfigProxy
 {
     /**
      * Instance du gestionnaire de configuration.
-     * @var ConfiguratorInterface
      */
-    private $configurator;
+    private ?ConfiguratorInterface $configurator = null;
 
     /**
      * Instance du gestionnaire de configuration.

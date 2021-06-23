@@ -14,9 +14,8 @@ trait ContainerProxy
 {
     /**
      * Instance du conteneur d'injection de dépendances.
-     * @var Container|null
      */
-    private $container;
+    private ?Container $container = null;
 
     /**
      * Ajout d'un service fourni par le conteneur d'injection de dépendances.

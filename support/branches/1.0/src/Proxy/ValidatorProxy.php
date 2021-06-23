@@ -12,15 +12,14 @@ use Pollen\Validation\ValidatorInterface;
 use RuntimeException;
 
 /**
- * @see \Pollen\Support\Proxy\FieldProxyInterface
+ * @see \Pollen\Support\Proxy\ValidatorProxyInterface
  */
 trait ValidatorProxy
 {
     /**
      * Instance du gestionnaire de validation.
-     * @var ValidatorInterface
      */
-    private $validator;
+    private ?ValidatorInterface $validator = null;
 
     /**
      * Instance du gestionnaire de validation|Validation.
