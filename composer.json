@@ -8,7 +8,7 @@
     "support",
     "PHP developpement"
   ],
-  "time": "2021-06-23",
+  "time": "2021-06-24",
   "license": "MIT",
   "authors": [
     {
@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": "^7.4 || ^8.0",
     "composer/composer": "^2.0",
     "composer/installers": "~1.0",
     "ramsey/uuid": "^4.0",
@@ -33,8 +33,8 @@
     "vlucas/phpdotenv": "^5.3"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "^9.0"
+    "phpunit/phpunit": "^9.0",
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
