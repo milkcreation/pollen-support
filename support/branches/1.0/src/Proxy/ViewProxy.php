@@ -21,11 +21,6 @@ trait ViewProxy
     private ?ViewManagerInterface $viewManager = null;
 
     /**
-     * View instance.
-     */
-    private ?ViewInterface $view = null;
-
-    /**
      * Resolve viewManager instance.
      *
      * @return ViewManagerInterface
@@ -43,6 +38,7 @@ trait ViewProxy
                 );
             }
         }
+
         return $this->viewManager;
     }
 
@@ -56,27 +52,13 @@ trait ViewProxy
      */
     public function view(?string $name = null, array $data = [])
     {
-        if ($this->view === null) {
-            $this->view = $this->viewManager()->getDefaultView();
-        }
+        $view = $this->viewManager()->getDefaultView();
 
         if ($name === null) {
-            return $this->view;
+            return $view;
         }
 
-        return $this->view->render($name, $data);
-    }
-
-    /**
-     * Set view instance.
-     *
-     * @param ViewInterface $view
-     *
-     * @return void
-     */
-    public function setView(ViewInterface $view): void
-    {
-        $this->view = $view;
+        return $view ->render($name, $data);
     }
 
     /**

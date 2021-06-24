@@ -27,15 +27,6 @@ interface ViewProxyInterface
     public function view(?string $name = null, array $data = []);
 
     /**
-     * Set view instance.
-     *
-     * @param ViewInterface $view
-     *
-     * @return void
-     */
-    public function setView(ViewInterface $view): void;
-
-    /**
      * Set viewManager instance.
      *
      * @param ViewManagerInterface $viewManager
