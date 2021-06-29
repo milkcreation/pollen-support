@@ -31,7 +31,7 @@ class Env extends BaseEnv
      *
      * @return bool
      */
-    public static function isDev(): bool
+    public static function inDev(): bool
     {
         return static::get('APP_ENV') === 'dev' || static::get('APP_ENV') === 'developpement';
     }
@@ -41,7 +41,7 @@ class Env extends BaseEnv
      *
      * @return bool
      */
-    public static function isProd(): bool
+    public static function inProd(): bool
     {
         return static::get('APP_ENV') === 'prod' || static::get('APP_ENV') === 'production';
     }
@@ -51,7 +51,7 @@ class Env extends BaseEnv
      *
      * @return bool
      */
-    public static function isStaging(): bool
+    public static function inStaging(): bool
     {
         return static::get('APP_ENV') === 'staging';
     }

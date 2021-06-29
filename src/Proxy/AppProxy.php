@@ -15,10 +15,7 @@ use RuntimeException;
  */
 trait AppProxy
 {
-    /**
-     * Instance.
-     */
-    private ?ApplicationInterface $app;
+    private ?ApplicationInterface $app = null;
 
     /**
      * Resolve App Instance or service served by container.
