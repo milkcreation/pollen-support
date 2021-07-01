@@ -12,29 +12,29 @@ class Html
     /**
      * @var bool
      */
-    protected $escDoubleEncode = true;
+    protected bool $escDoubleEncode = true;
 
     /**
      * @var string
      */
-    protected $escEncoding = 'UTF-8';
+    protected string $escEncoding = 'UTF-8';
 
     /**
      * @var int
      */
-    protected $escFlags = ENT_QUOTES;
+    protected int $escFlags = ENT_QUOTES;
 
     /**
      * @var bool
      */
-    protected $tagJson = false;
+    protected bool $tagJson = false;
 
     /**
      * Conversion des caractères spéciaux.
      *
      * @param string|bool|array|object $value
      *
-     * @return mixed
+     * @return array|bool|int|object|string|null
      */
     public static function e($value)
     {
