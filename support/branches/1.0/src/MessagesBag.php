@@ -72,7 +72,7 @@ class MessagesBag implements MessagesBagInterface
      *
      * @var array<int, string> $levels Logging levels
      */
-    protected static $levels = [
+    protected static array $levels = [
         self::DEBUG     => 'DEBUG',
         self::INFO      => 'INFO',
         self::SUCCESS   => 'SUCCESS',
@@ -88,19 +88,19 @@ class MessagesBag implements MessagesBagInterface
      * Niveau de traitement des messages.
      * @var int
      */
-    protected $handlingLevel = self::DEBUG;
+    protected int $handlingLevel = self::DEBUG;
 
     /**
      * Liste des enregistrements
-     * @var ParamsBag
+     * @var ParamsBag|null
      */
-    private $records;
+    private ?ParamsBag $records = null;
 
     /**
      * Liste des enregistrement collectés (dédiés à la recherche).
      * @var Collection|null
      */
-    private $collectedRecords;
+    private ?Collection $collectedRecords = null;
 
     /**
      * Récupération d'un élément d'itération.
@@ -278,7 +278,7 @@ class MessagesBag implements MessagesBagInterface
             $this->records = new ParamsBag();
         }
 
-        if (is_null($key)) {
+        if ($key === null) {
             return $this->records;
         }
 

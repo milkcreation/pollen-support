@@ -15,7 +15,7 @@ trait MessagesBagAwareTrait
      * Instance du gestionnaire des messages.
      * @var MessagesBag|null
      */
-    private $messagesBag;
+    private ?MessagesBag $messagesBag = null;
 
     /**
      * Définition d'un message|Instance du gestionnaire de message.
@@ -32,7 +32,7 @@ trait MessagesBagAwareTrait
             $this->messagesBag = new MessagesBag();
         }
 
-        if (is_null($message)) {
+        if ($message === null) {
             return $this->messagesBag;
         }
 
