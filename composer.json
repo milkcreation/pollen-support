@@ -1,14 +1,14 @@
 {
   "name": "pollen-solutions/support",
   "description": "Pollen Support Component - Collection of PHP development support tools.",
-  "homepage": "https://www.presstify.com/pollen-solutions/support/",
+  "homepage": "https://github.com/milkcreation/pollen-support.git",
   "keywords": [
     "pollen-solutions",
     "component",
     "support",
     "PHP developpement"
   ],
-  "time": "2021-07-15",
+  "time": "2021-09-15",
   "license": "MIT",
   "authors": [
     {
